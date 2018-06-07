@@ -1,0 +1,36 @@
+{
+    "name": "speedware",
+    "displayName": "Speedware",
+    "description": "VS Code support for the Speedware Language",
+    "version": "1.0.0",
+    "publisher": "davidharrisjr",
+    "icon": "Assets/Speedware.PNG",
+    "repository": {
+        "url": "https://github.com/bblldave/SpeedwareVScodeExtension.git"
+    },
+    "engines": {
+        "vscode": "^1.23.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "speedware",
+            "aliases": ["Speedware", "speedware"],
+            "extensions": [".spw"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "speedware",
+            "scopeName": "source.spw",
+            "path": "./syntaxes/speedware.tmLanguage.json"
+        }],
+        "snippets": [
+            {
+                "language": "speedware",
+                "path": "./snippets/speedware.json"
+            }
+        ]
+    }
+}

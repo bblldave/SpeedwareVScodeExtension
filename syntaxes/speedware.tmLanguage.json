@@ -1,0 +1,146 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Speedware",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#programs"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#databasefields"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+			{
+				"name": "keyword.spw",
+				"match": "\\b(FOR|BEGIN|END|PARM |IF|DCL|ABORT|ACCEPT|ACCESS|ACCTFILE|ADDRESS|ALIAS|ALPHA|AND|APPLICATION|ARITHMETIC|AS|ASAFILE|ASSIGN|ASYNC|AT|BACKWARD|BASE|BATCHJOB|BEGIN|BOTTOM|BRANCH|BREAK|BREAKS|BUSNAME|BUTTON|BYTES|CALCUL|CALL|CALLSUB|CASE|CASE|CENTER|CHGLOAD|CITY|CLOSE|COLUMNS|COMMAND|COMPATIBLE|COMPILEINFO|CONDITION|CONNECT|CONNECTION|CONTACT|CONTINUE|COUNTRY|CPTFILE|CREATE|CREDENTIALS|CRITERIA|CURSOR|DATE|DCL|DCLDDE|DCLFILE|DCLFRAME|DCLHUGE|DCLPRINTER|DCLPROC|DCLSESSION|DCLSTRUCT|DCLVIEW|DDEERROR|DDEITEM|DDESERVER|DECIMAL|DEFAULT|DELETE|DISPLAY|DLFOAT|DO|DOB|DOMAIN|DUMMY|DUMPOUT|DUP|DURACTION|D_FALSE|D_TRUE|EDIT|ELSE|ENCRYPT|END|ENDCASE|ENDPROGRAM|ENDSUB|ENVFILE|ERR|ERROR|EXEC|EXECUTE|EXECUTEINFO|EXPORT|FACS|FAIL|FALSE|FAPPTS|FBUMP|FIELD|FILE|FILES|FINDAPPT|FIRSTNAME|FNCKEY|FOR|FOR|FORM|FORMAT|FOUND|FREEZE|FROM|FTLIST|GENERAL|GENERATION|GET|GO|HEAD|HEADING|HELP|HILITE|HOLDFILE|HOST|HPFLOAT|HRSFILE|IF|IF|IGNORE|IN|INIT|INP|INPUT|IS|ITERATIONS|KEY|LABEL|LANGUAGE|LASTNAME|LAUNCH|LEFT|LENGTH|LET|LIKE|LINE80|LINK|LIST|LIST|LISTING|LOADED|LOADVAR|LOCATION|LOG|LOGON|LOOKUP|LOOP|LOOP|MANDATORY|MANUAL|MATCH|MENUBAR|MENUCASCADE|MENUITEM|MENUNABLE|MENUPANEL|MENUPOPUP|MENURADIO|MENUSEPARATOR|MENUTOGGLE|MIDNAME|MODE|MODIFIER|MODIFY|MOMENT|MSG|MSGBOX|MSGOPTIONS|MSGSTYLE|NAME|NEED|NEW|NEWDEVICE|NEXT|NOENTRY|NOKEY|NOLABEL|NORUN|NOSEQ|NOT|NOTHING|NOWARN|NPI|NULL|NUMERIC|OF|OMNIDEX|ON|ONLY|OPEN|OR|OTHERWISE|OUT|PACK|PARM!|PARMHUGE|PASSWORD|PAUSE|PICTURE|PRINT|PRINTER|PRINTHTML|PRINTSCREEN|PROCEED|PROMPT|PROTECTED|PRTS|RAW|RECOMPILE|REDEFINES|REINDATE|REMOTE|REPEAT|RESET|RETRY|RETRY|RETURN|RIGHT|RPTLIST|RUN|SANCDATE|SANCTYPE|SCOPE|SECTION|SEGMENT|SELECT|SELECTED|SEQS|SEQUENCE|SESSION|SET|SHAPE|SHOW|SKIP|SKIP|SORT|SORT|SORT|SORTED|SORTS|SOSEQ|SOUND|SPECIALTY|STATE|STATEMENT|STEP|STORE|STRUCT|SUBMIT|SUBRETURN|SUBSECTION|SUBTYPE|SYNC|TAKE|TAKEFILE|TESTFILE|TESTREC|TEXT|THEN|TIMEOUT|TITLE|TOP|TRANSACTION|TRUE|TYPE|UPIN|USER|USING|VAL|VARCHAR|WAIT|WAIT|WHERE|WHILE|WINDOW|WITH|ZIP|ZONE)\\b",
+				"comment": "Speedware keywords"
+			},
+			
+			{
+				"name": "constant.numeric.spw",
+				"match": "\\b(GV-[\\w\\-]*)\\b",
+				"comment": "Global variables"
+			},
+			{
+				"name":"keyword.control.spw",
+				"match": "(LV-[\\w\\-]*)",
+				"comment": "Local Variables"
+			},
+		
+			{
+				"name":"entity.name.class.spw",
+				"match": "(PV-[\\w\\-]*)",
+				"comment": "Parameter variables"
+			},
+			{
+				"name":"invalid.spw",
+				"match": "(EXIT)",
+				"comment": "End of the program"
+			}
+			
+			
+		
+		]
+		},
+		"strings": {
+			"name": "string.quoted.double.spw",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					
+				}
+			]
+		},
+		"comments":{
+			"patterns": [
+				{
+					"name":"comment.block.spw",
+					"begin": "#NOTE",
+					"beginCaptures": {
+						"0": {
+							"name": "comment.block.spw"
+						}
+					},
+					"end": "#ENDNOTE",
+					"endCaptures": {
+						"0": {
+							"name":"comment.block.spw"
+						}
+					},
+					"comment": "Speedware Block Comments"
+
+				},
+				{
+					"name":"comment.line.spw",
+					"begin": "\\(\\*",
+					"beginCaptures": {
+						"0":{
+							"name":"comment.line.spw"
+						}
+					},
+					"end": "\\*\\)",
+					"endCaptures": {
+						"0":{
+							"name":"comment.line.spw"
+						}
+					},
+					"comment": "Speedware line comments"
+				}
+			]
+		},
+		"programs":{
+			"patterns": [
+				{
+					"name": "constant.character.escape.spw",
+					"match": "\\b(INCLUDE-[\\w\\-]*|UTILITY-[\\w\\-]*|LOGIC-[\\w\\-]*|REPORT-[\\w\\-]*)\\b",
+					"comment": "Program calls"
+				}
+			]
+		},
+		"functions":{
+			"patterns": [
+				{
+					"name":"comment.spw",
+					"match": "\\$[A-Z][A-Z]+|, LEFT|, RIGHT|,LEFT|,RIGHT",
+					"comment": "Speedware default functions"
+				}
+			]
+		},
+		"databasefields":{
+			"patterns": [
+				{
+					"name":"constant.regexp.spw",
+					"match": "[A-Z][A-Z]+-[A-Z]+-?[A-Z0-9]+-?[A-Z0-9]+-?[A-Z0-9]+",
+					"comment": "Database name/fields"
+				},
+				{
+					"name":"constant.regexp.spw",
+					"match": "[A-Z][A-Z]+-[A-Z]+[A-Z]?",
+					"comment":"Database names/fields with only 1 char after"
+				},
+				{
+					"name":"constant.regexp.spw",
+					"match":"(PAS|HARP|VMPAS)\\.[A-Z]+",
+					"comment": "Database name/fields with database prefix"
+				}
+			]
+		}
+		
+	},
+	"scopeName": "source.spw"
+}
