@@ -1,0 +1,8 @@
+{
+    "absolute": {
+        "prefix": "\\$ABS",
+        "description":
+            "The $ABS function returns the absolute value of a numeric or duration expression.",
+        "example": "$ABS ([EXP[RESSION]=] numeric_expression|duration_expression)"
+    }
+}

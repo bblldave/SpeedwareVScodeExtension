@@ -14,23 +14,95 @@
     "categories": [
         "Programming Languages"
     ],
+    "activationEvents": [
+        "onLanguage:speedware"
+    ],
+    "main": "./src/extension",
     "contributes": {
         "languages": [{
             "id": "speedware",
             "aliases": ["Speedware", "speedware"],
-            "extensions": [".spw"],
+            "extensions": [".spw", ".spec"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
             "language": "speedware",
             "scopeName": "source.spw",
-            "path": "./syntaxes/speedware.tmLanguage.json"
+            "path":
+             "./src/syntaxes/speedware.tmLanguage.json"
         }],
         "snippets": [
             {
                 "language": "speedware",
-                "path": "./snippets/speedware.json"
+                "path": "./src/snippets/speedware.json"
             }
-        ]
-    }
+        ],
+        "commands": [
+			{
+				"command": "extension.jump",
+				"title": "Jump to do/end"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.jump",
+				"key": "alt+shift+\\",
+				"when": "editorTextFocus"
+			}
+		],
+		"configuration": {
+			"title": "do...end match",
+			"properties": {
+				"doEndMatch.keywords": {
+					"type": "object",
+					"default": {
+						"open": [
+							"do",
+							"fn"
+						],
+						"close": [
+							"end"
+						]
+					},
+					"description": "The keywords to match. Any combination of words in open and close will trigger matches."
+				},
+				"doEndMatch.style": {
+					"type": "object",
+					"default": {
+						"borderWidth": "1px",
+						"borderStyle": "none none solid none"
+					},
+					"description": "Custom style for matching keyword blocks"
+				},
+				"doEndMatch.wordSeparators": {
+					"type": "string",
+					"default": " \n\t`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+					"description": "Characters that will be used as word separators when looking for keywords."
+				},
+				"doEndMatch.ignoreDoWithColon": {
+					"type": "boolean",
+					"default": true,
+					"description": "When enabled fixes a bug that causes `do:` to still match with `end` in Elixir."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.9.2",
+		"vscode": "^1.1.18",
+		"tslint": "^5.10.0",
+		"@types/node": "^10.5.2",
+		"@types/mocha": "^5.2.4"
+	},
+	"dependencies": {
+		"timeout-as-promise": "^1.0.0"
+	}
+   
 }
