@@ -6,6 +6,7 @@ const vscode_1 = require("vscode");
 const DoEndParser_1 = require("./DoEndParser");
 const DoEndParserController_1 = require("./DoEndParserController");
 const functionsArray = require("./hover/functions.json");
+const variablesArray = require("./hover/variables.json");
 const vscodeConfig = vscode_1.workspace.getConfiguration('speedware');
 // This method is called when your extension is activated. Activation is
 // controlled by the activation events defined in package.json.
@@ -46,6 +47,14 @@ function activate(context) {
                             functionsArray[snippet].hover == word
                         ){
                             return createHover(functionsArray[snippet],type);
+                        }
+                    }
+                    for(const snippet in variablesArray) {
+                        if(
+                            variablesArray[snippet].prefix == word ||
+                            variablesArray[snippet].hover == word
+                        ){
+                            return createHover(variablesArray[snippet],type);
                         }
                     }
 
