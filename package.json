@@ -2,7 +2,7 @@
     "name": "speedware",
     "displayName": "Speedware",
     "description": "VS Code support for the Speedware Language",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "davidharrisjr",
     "icon": "Assets/Speedware.PNG",
     "repository": {
@@ -14,23 +14,84 @@
     "categories": [
         "Programming Languages"
     ],
+    "activationEvents": [
+        "onLanguage:speedware"
+    ],
+    "main": "./src/extension",
     "contributes": {
         "languages": [{
             "id": "speedware",
             "aliases": ["Speedware", "speedware"],
-            "extensions": [".spw"],
+            "extensions": [".spw", ".spec"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
             "language": "speedware",
             "scopeName": "source.spw",
-            "path": "./syntaxes/speedware.tmLanguage.json"
+            "path":
+             "./src/syntaxes/speedware.tmLanguage.json"
         }],
         "snippets": [
             {
                 "language": "speedware",
-                "path": "./snippets/speedware.json"
+                "path": "./src/snippets/speedware.json"
             }
-        ]
-    }
+        ],
+        "commands": [
+			{
+				"command": "extension.jump",
+				"title": "Jump to do/end"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.jump",
+				"key": "alt+shift+\\",
+				"when": "editorTextFocus"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "speedware",
+			"properties": {
+				"speedware.keywords": {
+					"type": "object",
+					"default": {
+						"open": [
+							"BEGIN"
+							
+						],
+						"close": [
+							"END"
+						]
+					},
+					"description": "The keywords to match. Any combination of words in open and close will trigger matches."
+				},
+				"speedware.style": {
+					"type": "object",
+					"default": {
+						"borderWidth": "1px",
+						"borderStyle": "none none solid none"
+					},
+					"description": "Custom style for matching keyword blocks"
+				},
+				"speedware.wordSeparators": {
+					"type": "string",
+					"default": " \n\t`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+					"description": "Characters that will be used as word separators when looking for keywords."
+				},
+				"speedware.ignoreDoWithColon": {
+					"type": "boolean",
+					"default": true,
+					"description": "When enabled fixes a bug that causes `do:` to still match with `end` in Elixir."
+				},
+				"speedware.hover":{
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to enable/disable speeware hover."
+				}
+			}
+		}
+	}
+   
 }

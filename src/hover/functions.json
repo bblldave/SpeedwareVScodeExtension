@@ -1,0 +1,305 @@
+{
+    "absolute": {
+        "prefix": "ABS",
+        "description":
+            "The $ABS function returns the absolute value of a numeric or duration expression.",
+        "example": "$ABS ([EXP[RESSION]=] numeric_expression|duration_expression)"
+    },
+    "address": {
+        "prefix": "ADDR",
+        "description":
+            "The $ADDR function converts a string expression into the conventional format for an address",
+        "example": "$ADDR ([EXP[RESSION]=] string_expression)" 
+    },
+    "ascii": {
+        "prefix": "ASC",
+        "description":
+            "The $ASC function returns the ASCII value of the first character of a string expression.",
+        "example": "$ASC ([EXP[RESSION]=] string_expression)" 
+    },
+    "blobsize": {
+        "prefix": "BLOB_SIZE",
+        "description":
+            "The $BLOB_SIZE function retrieves the size of a BLOB column or variable.",
+        "example": "$BLOB_SIZE ([NAME=] [file.]variable)" 
+    },
+    "character": {
+        "prefix": "CHR",
+        "description":
+            "The $CHR function converts a numeric expression to its ASCII character equivalent.",
+        "example": "$CHR ([EXP[RESSION]=] numeric_expression)" 
+    },
+    "clean": {
+        "prefix": "CLN",
+        "description":
+            "The $CLN function removes multiple blanks from a string.",
+        "example": "$CLN ([EXP[RESSION]=] string_expression )" 
+    },
+    "closesession": {
+        "prefix": "CLOSE_SESSION",
+        "description":
+            "The $CLOSE_SESSION function manually closes a remote session.",
+        "example": "$CLOSE_SESSION ([[SESSION=] session]);" 
+    },
+    "date": {
+        "prefix": "DAT",
+        "description":
+            "The $DAT function converts a numeric expression from its Julian date value to a date expression",
+        "example": "$DAT ([EXP[RESSION]=] numeric_expression)" 
+    },
+    "datetomoment": {
+        "prefix": "DATE_TO_MOMENT",
+        "description":
+            "The $DATE_TO_MOMENT function converts a date and time to a moment.",
+        "example": "$DATE_TO_MOMENT ([EXP[RESSION]=] date expression, [TIME=] time_expression)" 
+    },
+    "datetimetomoment": {
+        "prefix": "DATETIME_TO_MOMENT",
+        "description":
+            "The $DATE_TO_MOMENT function converts a date and time to a moment.",
+        "example": "$DATETIME_TO_MOMENT ([EXP[RESSION]=] datetime_expression)" 
+    },
+    "day": {
+        "prefix": "DAY",
+        "description":
+            "The $DAY function accepts a date or moment expression and returns the name of the corresponding weekday",
+        "example": "$DAY ([EXP[RESSION]=] date_expression|moment_expression)" 
+    },
+    "durationtotime": {
+        "prefix": "DURATION_TO_TIME",
+        "description":
+            "The $DURATION_TIME function converts a duration to a time.",
+        "example": "$DURATION_TO_TIME([EXP[RESSION]=] duration_expression)" 
+    },
+    "dws": {
+        "prefix": "DWS",
+        "description":
+            "The $DWS function converts uppercase alphabetic characters to lowercase.",
+        "example": "$DWS ([EXP[RESSION]=] string_expression)" 
+    },
+    "edit": {
+        "prefix": "EDIT",
+        "description":
+            "The $EDIT function formats an expression for display.",
+        "example": "$EDIT ( [EXP[RESSION]=] [,[MASK=] string_expression ] [,[LEN[GTH]=] integer_expression ] [,[BWZ=] YES|NO ]);" 
+    },
+    "fileaccess": {
+        "prefix": "FILE_ACCESS",
+        "description":
+            "The $FILE_ACCESS function checks the existence of a file, and its accessibility.",
+        "example": "$FILE_ACCESS ( [NAME=] string_expression [,[ACCESS=] ANY|READ|WRITE|READ-WRITE])" 
+    },
+    "getenvironment": {
+        "prefix": "GETENV",
+        "description":
+            "The $GETENV function returns an environment/system variable.",
+        "example": "$GETENV ([VAR[IABLE]=] variable)" 
+    },
+    "increment": {
+        "prefix": "INCREMENT",
+        "description":
+            "The $INCREMENT function increments numeric array or non-array cells.",
+        "example": "$INCREMENT ( [NAME=] variable [,[FROM1=] integer_expression ][,[TO1=] integer_expression ] [,[FROM2=] integer_expression ] [,[TO2=] integer_expression ] [,[VAL[UE]=] numeric_expression])" 
+    },
+    "initialize": {
+        "prefix": "INITIALIZE",
+        "description":
+            "he $INITIALIZE function assigns a value to array or non-array cells..",
+        "example": "$INITIALIZE ( [NAME=] variable [,[FROM1=] integer_expression ] [,[TO1=] integer_expression ] [,[FROM2=] integer_expression ] [,[TO2=] integer_expression ] [,[VAL[UE]=] expression) ])" 
+    },
+    "julian": {
+        "prefix": "JUL",
+        "description":
+            "The $JUL function converts a date expression to a Julian date.",
+        "example": "$JUL ([EXP[RESSION]=] date_expression)" 
+    },
+    "length": {
+        "prefix": "LEN",
+        "description":
+            "The $LEN function returns the display length of a string expression.",
+        "example": "$LEN ([EXP[RESSION]=] string_expression)" 
+    },
+    "leftjustify": {
+        "prefix": "LJU",
+        "description":
+            "The $LJU function left-justifies a string within its display length.",
+        "example": "$LJU ([EXP[RESSION]=] string_expression)" 
+    },
+    "match": {
+        "prefix": "MATCH",
+        "description":
+            "The $MATCH function compares an expression to a pattern or range of values.",
+        "example": "$MATCH ( [EXP[RESSION=] expression [,[PAT[TERN]=] string_expression ] [,[MIN[IMUM]=] expression ] [,[MAX[IMUM]=] expression ])" 
+    },
+    "mid": {
+        "prefix": "MID",
+        "description":
+            "The $MID function extracts characters from a specified position in a string expression.",
+        "example": "$MID ( [EXP[RESSION]=] string_expression, [FROM=] integer_expression [,[TO=] integer_expression ]))" 
+    },
+    "modulo": {
+        "prefix": "MOD",
+        "description":
+            "The $MOD function performs a modulo operation.",
+        "example": "$MOD ([EXP[RESSION]=] numeric_expression|duration_expression, [MODULO=] numeric_expression|duration_expression)" 
+    },
+    "momenttodate": {
+        "prefix": "MOMENT_TO_DATE",
+        "description":
+            "The $MOMENT_TO_DATE function converts a moment expression to a date.",
+        "example": "$MOMENT_TO_DATE ([EXP[RESSION]=] moment_expression)" 
+    },
+    "momenttodatetime": {
+        "prefix": "MOMENT_TO_DATETIME",
+        "description":
+            "The $MOMENT_TO_DATETIME function converts a moment expression to a datetime expression",
+        "example": "$MOMENT_TO_DATETIME ([EXP[RESSION]=] moment_expression)" 
+    },
+    "momenttotime": {
+        "prefix": "MOMENT_TO_TIME",
+        "description":
+            "The $MOMENT_TO_TIME function converts a moment expression to a time.",
+        "example": "$MOMENT_TO_TIME ([EXP[RESSION]=] moment_expression)" 
+    },
+    "month": {
+        "prefix": "MOMENT_TO_TIME",
+        "description":
+            "The $MONTH function returns the name of the month in a date expression.",
+        "example": "$MONTH ([EXP[RESSION]=] date_expression)" 
+    },
+    "now": {
+        "prefix": "NOW",
+        "description":
+            "The $NOW function returns a MOMENT-type variable.",
+        "example": "$NOW" 
+    },
+    "null": {
+        "prefix": "NULL",
+        "description":
+            "The $NULL function checks whether the value of an expression is null.",
+        "example": "$NULL ([EXP[RESSION]=] expression)" 
+    },
+    "position": {
+        "prefix": "POS",
+        "description":
+            "The $POS function looks for a target string within a string expression and returns the position of the target.",
+        "example": "$POS ([EXP[RESSION]=] string_expression,[TARGET=] string_expression)" 
+    },
+    "power": {
+        "prefix": "POW",
+        "description":
+            "The $POW function raises a numeric expression to the power of a specified exponent.",
+        "example": "$POW ([EXP[RESSION]=] numeric_expression,[EXPO[NENT]=] exponent)" 
+    },
+    "relative": {
+        "prefix": "REL",
+        "description":
+            "The $REL function calculates a relative date based on a date expression.",
+        "example": "$REL ([EXP[RESSION]=] date_expression [,[REL[ATIVE]=] relative_date)])" 
+    },
+    "rightjustify": {
+        "prefix": "RJU",
+        "description":
+            "The $RJU function right-justifies a string within its display length.",
+        "example": "$RJU ([EXP[RESSION]=] string_expression)" 
+    },
+    "round": {
+        "prefix": "ROUND",
+        "description":
+            "The $ROUND function rounds a numeric expression to a specified number of significant digits.",
+        "example": "$ROUND ( [EXP[RESSION]=] numeric_expression [,[DEC[IMAL]=] integer_expression])" 
+    },
+    "roundduration": {
+        "prefix": "ROUND_DURATION",
+        "description":
+            "The $ROUND_DURATION function rounds a duration expression.",
+        "example": "$ROUND_DURATION ([EXP[RESSION]=] duration_expression, [UNIT=] duration_expression)" 
+    },
+    "roundmoment": {
+        "prefix": "ROUND_MOMENT",
+        "description":
+            "The $ROUND_MOMENT function rounds a moment expression.",
+        "example": "$ROUND_MOMENT ([EXP[RESSION]=] moment_expression,[UNIT=] duration_expression)" 
+    },
+    "string": {
+        "prefix": "STR",
+        "description":
+            "The $STR function converts any expression to a string expression.",
+        "example": "$STR ( [EXP[RESSION]=] expression [,[LEN[GTH]=] integer_expression ] [,[DEC[IMAL]=] integer_expression])" 
+    },
+    "subreturn": {
+        "prefix": "SUBRETURN",
+        "description":
+            "The $SUBRETURN function retrieves the value returned by the SUBRETURN verb.",
+        "example": "$SUBRETURN ([SUB[SECTION]=] string_constant);" 
+    },
+    "summation": {
+        "prefix": "SUMMATION",
+        "description":
+            "The $SUMMATION function calculates the total of numeric array cells.",
+        "example": "$SUMMATION ( [NAME=] numeric_array [,[FROM1=] integer_expression ] [,[TO1=] integer_expression ] [,[FROM2=] integer_expression ] [,[TO2=] integer_expression ] )" 
+    },
+    "timetoduration": {
+        "prefix": "TIME_TO_DURATION",
+        "description":
+            "The $TIME_TO_DURATION function converts a time to a duration.",
+        "example": "$TIME_TO_DURATION([EXP[RESSION]=] time_expression)" 
+    },
+    "totime": {
+        "prefix": "TOTIME",
+        "description":
+            "The $TOTIME function converts a 4- or 6-character time string expression into a time expression in the format HHMMSS.",
+        "example": "$TOTIME ([EXP[RESSION]=] string_expression)" 
+    },
+    "trim": {
+        "prefix": "TRIM",
+        "description":
+            "The $TRIM function removes blanks from a string.",
+        "example": "$TRIM ( [EXP[RESSION]=] string_expression [,[BLANK=] ALL|CENTER|LEFT|RIGHT])" 
+    },
+    "truncate": {
+        "prefix": "TRUNC",
+        "description":
+            "The $TRUNC function truncates a numeric expression.",
+        "example": "$TRUNC ( [EXP[RESSION]=] numeric_expression [,[DEC[IMAL]=] integer_expression])" 
+    },
+    "truncateduration": {
+        "prefix": "TRUNC_DURATION",
+        "description":
+            "The $TRUNC_DURATION expression truncates a duration expression.",
+        "example": "$TRUNC_DURATION ([EXP[RESSION]=] duration_expression, [UNIT=] duration_expression)" 
+    },
+    "truncatemoment": {
+        "prefix": "TRUNC_MOMENT",
+        "description":
+            "The $TRUNC_DURATION expression truncates a duration expression.",
+        "example": "$TRUNC_MOMENT ([EXP[RESSION]=] moment_expression, [UNIT=] duration_expression)" 
+    },
+    "upshift": {
+        "prefix": "UPS",
+        "description":
+            "The $UPS function upshifts alphabetic characters.",
+        "example": "$UPS ([EXP[RESSION]=] string_expression)" 
+    },
+    "waitsession": {
+        "prefix": "WAIT_SESSION",
+        "description":
+            "The $WAIT_SESSION function customizes an asynchronous remote section call. See “Remote section calls” on page 545 for details about remote calls.",
+        "example": "$WAIT_SESSION ([ [SESSION=] session ] [,[TIME=] integer_expression ][,[MESSAGE=] string_expression ]);" 
+    },
+    "year": {
+        "prefix": "YEAR",
+        "description":
+            "The $YEAR function extracts the year from a date expression.",
+        "example": "$YEAR([EXP[RESSION]=] date_expression)" 
+    },
+    "zerofill": {
+        "prefix": "ZFI",
+        "description":
+            "The $ZFI function fills leading blanks of a string expression with zeros.",
+        "example": "$ZFI([EXP[RESSION]=] string_expression)" 
+    }
+
+   
+   
+}
