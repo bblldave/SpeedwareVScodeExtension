@@ -51,22 +51,23 @@
 			}
 		],
 		"configuration": {
-			"title": "do...end match",
+			"type": "object",
+			"title": "speedware",
 			"properties": {
-				"doEndMatch.keywords": {
+				"speedware.keywords": {
 					"type": "object",
 					"default": {
 						"open": [
-							"do",
-							"fn"
+							"BEGIN"
+							
 						],
 						"close": [
-							"end"
+							"END"
 						]
 					},
 					"description": "The keywords to match. Any combination of words in open and close will trigger matches."
 				},
-				"doEndMatch.style": {
+				"speedware.style": {
 					"type": "object",
 					"default": {
 						"borderWidth": "1px",
@@ -74,15 +75,20 @@
 					},
 					"description": "Custom style for matching keyword blocks"
 				},
-				"doEndMatch.wordSeparators": {
+				"speedware.wordSeparators": {
 					"type": "string",
 					"default": " \n\t`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
 					"description": "Characters that will be used as word separators when looking for keywords."
 				},
-				"doEndMatch.ignoreDoWithColon": {
+				"speedware.ignoreDoWithColon": {
 					"type": "boolean",
 					"default": true,
 					"description": "When enabled fixes a bug that causes `do:` to still match with `end` in Elixir."
+				},
+				"speedware.hover":{
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to enable/disable speeware hover."
 				}
 			}
 		}

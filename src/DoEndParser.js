@@ -12,7 +12,7 @@ class DoEndParser {
     }
     dispose() { }
     updateConfig() {
-        const config = vscode_1.workspace.getConfiguration("doEndMatch");
+        const config = vscode_1.workspace.getConfiguration("speedware");
         this.decoration = vscode_1.window.createTextEditorDecorationType(config.style);
         const keywords = config.keywords;
         const all = keywords.open.concat(keywords.close);
