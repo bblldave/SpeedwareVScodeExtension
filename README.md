@@ -59,14 +59,19 @@ Added code snipper for line comments. Type lc and select the line comment dropdo
 Added BEGIN and END highlighting to help identify blocks of code. Also implemented Jump to command. Shortcut keys are ALT + SHIFT + \
 Added Hover feature for all speedware functions. Speedware variables do not support hover feature yet.
 To customize BEGIN and END highlighting use the following in your settings:
-"speedware.style": {
+```
+    "speedware.style": {
         "borderWidth": "1px",
         "borderStyle": "none none solid none",
         "borderColor": "#00FF00",
         "color": "#00FF00"
     },
+```
 
 BEGIN and END matching was implemented based on the do...end Match extension
+
+### Version 1.1.1
+Added hover feature to Speedware variables
 
 -----------------------------------------------------------------------------------------------------------
 

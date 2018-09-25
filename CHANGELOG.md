@@ -5,5 +5,5 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Released]
 - Initial release
-
--Added hover and begin end block identification
+- Added hover and begin end block identification
+- Added hover feature for Speedware varables
