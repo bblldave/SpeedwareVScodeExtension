@@ -8,13 +8,13 @@ class DoEndParserController {
     constructor(parser) {
         this.parser = parser;
         const saveEv = vscode_1.workspace.onDidSaveTextDocument(saved => {
-            setTimeout(() => {
-                const fileName = path.basename(saved.fileName);
-                if (fileName !== "settings.json") {
-                    return;
-                }
-                this.parser.updateConfig();
-            }, 2000);
+           // setTimeout(() => {
+            //    const fileName = path.basename(saved.fileName);
+            //    if (fileName !== "settings.json") {
+            //        return;
+             //   }
+              //  this.parser.updateConfig();
+            //}, 2000);
         });
         // Subscribe to selection change and editor activation events
         const subscriptions = [];
