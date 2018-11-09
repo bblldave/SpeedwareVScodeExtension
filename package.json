@@ -40,7 +40,7 @@
         "commands": [
 			{
 				"command": "extension.jump",
-				"title": "Jump to do/end"
+				"title": "Jump to Beginning/Ending of code block"
 			}
 		],
 		"keybindings": [
@@ -54,15 +54,17 @@
 			"type": "object",
 			"title": "speedware",
 			"properties": {
-				"speedware.keywords": {
+				"speedware.codeBlockKeywords": {
 					"type": "object",
 					"default": {
 						"open": [
-							"BEGIN"
+							"BEGIN",
+							"SUBSECTION"
 							
 						],
 						"close": [
-							"END"
+							"END",
+							"ENDSUB"
 						]
 					},
 					"description": "The keywords to match. Any combination of words in open and close will trigger matches."
@@ -73,22 +75,22 @@
 						"borderWidth": "1px",
 						"borderStyle": "none none solid none"
 					},
-					"description": "Custom style for matching keyword blocks"
+					"description": "Custom style for matching code block keywords"
 				},
 				"speedware.wordSeparators": {
 					"type": "string",
-					"default": " \n\t`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+					"default": " \n\t`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
 					"description": "Characters that will be used as word separators when looking for keywords."
-				},
-				"speedware.ignoreDoWithColon": {
-					"type": "boolean",
-					"default": true,
-					"description": "When enabled fixes a bug that causes `do:` to still match with `end` in Elixir."
 				},
 				"speedware.hover":{
 					"type": "boolean",
 					"default": true,
-					"description": "Whether to enable/disable speeware hover."
+					"description": "Whether to enable/disable speedware hover."
+				},
+				"speedware.goToDefintion":{
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to enable/disable speedware goToDefinition"
 				}
 			}
 		}

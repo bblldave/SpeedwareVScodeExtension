@@ -14,7 +14,7 @@ class DoEndParser {
     updateConfig() {
         const config = vscode_1.workspace.getConfiguration("speedware");
         this.decoration = vscode_1.window.createTextEditorDecorationType(config.style);
-        const keywords = config.keywords;
+        const keywords = config.codeBlockKeywords;
         const all = keywords.open.concat(keywords.close);
         this.keywords = Object.assign({ all }, keywords);
         this.wordSeparators = config.wordSeparators;

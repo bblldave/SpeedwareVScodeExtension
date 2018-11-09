@@ -7,3 +7,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Initial release
 - Added hover and begin end block identification
 - Added hover feature for Speedware varables
+- Added goToDefinition feature
