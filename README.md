@@ -73,5 +73,9 @@ BEGIN and END matching was implemented based on the do...end Match extension
 ### Version 1.1.1
 Added hover feature to Speedware variables
 
+### Version 1.2.0
+Added goToDefinition feature for speedware
+Uset F12 key to open definition in a new window for use alt + F12 to peak defintions
+
 -----------------------------------------------------------------------------------------------------------
 
