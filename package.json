@@ -1,43 +1,52 @@
 {
-    "name": "speedware",
-    "displayName": "Speedware",
-    "description": "VS Code support for the Speedware Language",
-    "version": "1.1.1",
-    "publisher": "davidharrisjr",
-    "icon": "Assets/Speedware.PNG",
-    "repository": {
-        "url": "https://github.com/bblldave/SpeedwareVScodeExtension.git"
-    },
-    "engines": {
-        "vscode": "^1.23.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "activationEvents": [
-        "onLanguage:speedware"
-    ],
-    "main": "./src/extension",
-    "contributes": {
-        "languages": [{
-            "id": "speedware",
-            "aliases": ["Speedware", "speedware"],
-            "extensions": [".spw", ".spec"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "speedware",
-            "scopeName": "source.spw",
-            "path":
-             "./src/syntaxes/speedware.tmLanguage.json"
-        }],
-        "snippets": [
-            {
-                "language": "speedware",
-                "path": "./src/snippets/speedware.json"
-            }
-        ],
-        "commands": [
+	"name": "speedware",
+	"displayName": "Speedware",
+	"description": "VS Code support for the Speedware Language",
+	"version": "1.2.0",
+	"publisher": "davidharrisjr",
+	"icon": "Assets/Speedware.PNG",
+	"repository": {
+		"url": "https://github.com/bblldave/SpeedwareVScodeExtension.git"
+	},
+	"engines": {
+		"vscode": "^1.23.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onLanguage:speedware"
+	],
+	"main": "./src/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "speedware",
+				"aliases": [
+					"Speedware",
+					"speedware"
+				],
+				"extensions": [
+					".spw",
+					".spec"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "speedware",
+				"scopeName": "source.spw",
+				"path": "./src/syntaxes/speedware.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "speedware",
+				"path": "./src/snippets/speedware.json"
+			}
+		],
+		"commands": [
 			{
 				"command": "extension.jump",
 				"title": "Jump to Beginning/Ending of code block"
@@ -60,7 +69,6 @@
 						"open": [
 							"BEGIN",
 							"SUBSECTION"
-							
 						],
 						"close": [
 							"END",
@@ -82,12 +90,12 @@
 					"default": " \n\t`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
 					"description": "Characters that will be used as word separators when looking for keywords."
 				},
-				"speedware.hover":{
+				"speedware.hover": {
 					"type": "boolean",
 					"default": true,
 					"description": "Whether to enable/disable speedware hover."
 				},
-				"speedware.goToDefintion":{
+				"speedware.goToDefintion": {
 					"type": "boolean",
 					"default": true,
 					"description": "Whether to enable/disable speedware goToDefinition"
@@ -95,5 +103,4 @@
 			}
 		}
 	}
-   
 }

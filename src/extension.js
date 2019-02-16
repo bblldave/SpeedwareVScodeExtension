@@ -110,11 +110,20 @@ function processSearch(word){
                 let line_no = parseInt(arr[1] -1);
                 let col_no = parseInt(arr[2] -1);
                 let fileWording = arr[3].trim();
-                let searchLenght = searchTerm.length;
-                let substring = fileWording.substring(0,5+searchLenght);
-                let dclsearch = "DCL " + searchTerm + "(";
+                if(!fileWording.includes("SUBSECTION") && (fileWording.indexOf(searchTerm + searchTerm.length) != " " || fileWording.indexOf(searchTerm + searchTerm.length) != "("))
+                {
+                    if(fileWording === searchTerm  && line_no === 0)
+                    {
+                        fileWording = fileWording;
+                    }
+                    else
+                    {
+                        fileWording = fileWording + " ";
+                    }
+                    
+                }
                 // use regex,the seach result is not the original word
-                if(fileWording.includes("DCL " + searchTerm + " ")|| fileWording.includes("DCL " + searchTerm + "("))
+                if(fileWording.includes("DCL " + searchTerm + " ")|| fileWording.includes("DCL " + searchTerm + "(") || fileWording.includes("DCL " +searchTerm + "\\n"))
                 {
                     let start_pos = new vscode_1.Position(line_no, col_no);
                     let end_pos = new vscode_1.Position(line_no, col_no + searchTerm.length);
