@@ -30,7 +30,7 @@
     "For Selected Do Begin":{
         "prefix": "for selected do",
         "body":[
-            "FOR ${1:variable/databaseField} SELECTED DO",
+            "FOR ${1:variable/databaseField} SELECTED DO BEGIN",
                 "   ${2:logic}",
             "END;"   
         ],

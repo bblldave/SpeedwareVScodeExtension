@@ -56,13 +56,17 @@
 		
 		]
 		},
-		"strings": {
-			"name": "string.quoted.double.spw",
-			"begin": "\"",
-			"end": "\"",
+		"strings": {	
 			"patterns": [
 				{
-					
+					"name": "string.quoted.double.spw",
+					"begin": "\"",
+					"end": "\""
+				},
+				{
+					"name": "string.quoted.single.spw",
+					"begin": "\\'",
+					"end": "\\'"
 				}
 			]
 		},
