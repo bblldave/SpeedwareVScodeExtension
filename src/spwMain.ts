@@ -13,11 +13,13 @@ export function activate(context: vscode.ExtensionContext): void{
     let activeEditor = vscode.window.activeTextEditor;
     let codeBlockParser = new CodeBlockParser();
     let codeBlockParseController = new CodeBlockParseController(codeBlockParser);
-    let jump = vscode.commands.registerCommand("blockJump", () => {
+    let jump = vscode.commands.registerCommand("extension.jump", () => {
         codeBlockParser.jump();
     });
 
-    if(!activeEditor || !activeEditor.document) return;
+    if(!activeEditor || !activeEditor.document) {
+        return;
+    }
 
     registerDocumentType(docType);
 
