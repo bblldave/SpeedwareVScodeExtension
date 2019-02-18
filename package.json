@@ -2,7 +2,7 @@
 	"name": "speedware",
 	"displayName": "Speedware",
 	"description": "VS Code support for the Speedware Language",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"publisher": "davidharrisjr",
 	"icon": "Assets/Speedware.PNG",
 	"repository": {
@@ -37,7 +37,7 @@
 			{
 				"language": "speedware",
 				"scopeName": "source.spw",
-				"path": "./src/syntaxes/speedware.tmLanguage.json"
+				"path": "./out/syntaxes/speedware.tmLanguage.json"
 			}
 		],
 		"snippets": [
