@@ -77,5 +77,15 @@ Added hover feature to Speedware variables
 Added goToDefinition feature for speedware
 Uset F12 key to open definition in a new window for use alt + F12 to peak defintions
 
+### Version 1.2.3
+Fixed bug that caused code block highlighter to crash and require a vscode restart
+Fixed the for selected do begin snipped
+Added a scope to single quoted strings. Now you should be able to change the color is desired
+Updated code block highlighter
+
+### Version 1.2.5
+Fixed bug that caused code block highlighter to highlight keywords within comments
+Fixed bug that prevented go to definition from working when a LOGIC program was changed to UTILITY by autobahn
+
 -----------------------------------------------------------------------------------------------------------
 
