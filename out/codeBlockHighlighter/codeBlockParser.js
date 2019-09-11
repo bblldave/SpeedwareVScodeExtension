@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 class CodeBlockParser {
     constructor() {
+        this.blockCmtStartLine = 0;
+        this.blockCmtEndLine = 0;
         this.updateConfig();
         this.past = false;
     }
@@ -111,6 +113,31 @@ class CodeBlockParser {
                 continue;
             }
             let { word, range } = this.findWordRange(doc, new vscode.Position(line, character));
+            let commentStart = lineText.indexOf("(*", 0);
+            let commentEnd = lineText.indexOf("*)");
+            let linechecker;
+            if (lineText.includes('#NOTE')) {
+                this.blockCmtStartLine = range.start.line + 1;
+                linechecker = doc.lineAt(this.blockCmtStartLine).text;
+                for (let lineNumber = this.blockCmtStartLine; lineNumber < doc.lineCount; lineNumber++) {
+                    let text = doc.lineAt(lineNumber).text;
+                    if (text.includes('#ENDNOTE')) {
+                        this.blockCmtEndLine = lineNumber + 1;
+                        break;
+                    }
+                }
+            }
+            if (this.isKeyword(word, doc, range) && range.start.line > this.blockCmtStartLine &&
+                range.end.line < this.blockCmtEndLine) {
+                character += parseDir;
+                continue;
+            }
+            if (this.isKeyword(word, doc, range) &&
+                lineText.indexOf(word, 0) > commentStart &&
+                lineText.indexOf(word, 0) < commentEnd) {
+                character += parseDir;
+                continue;
+            }
             if (this.isKeyword(word, doc, range)) {
                 return { word, range };
             }
