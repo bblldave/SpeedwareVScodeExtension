@@ -2,7 +2,7 @@
 	"name": "speedware",
 	"displayName": "Speedware",
 	"description": "VS Code support for the Speedware Language",
-	"version": "1.2.5",
+	"version": "1.2.4",
 	"publisher": "davidharrisjr",
 	"icon": "Assets/Speedware.PNG",
 	"repository": {
