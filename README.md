@@ -87,5 +87,8 @@ Updated code block highlighter
 Fixed bug that caused code block highlighter to highlight keywords within comments
 Fixed bug that prevented go to definition from working when a LOGIC program was changed to UTILITY by autobahn
 
+
+### Version 1.2.7
+Fixed bug that was causing ceratin database fields to be displayed as keywords
 -----------------------------------------------------------------------------------------------------------
 
