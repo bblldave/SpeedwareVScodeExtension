@@ -6,8 +6,6 @@ This extension is to add support for the speedware programming language.
 
 Syntax Highlighting is currently available.
 
-Code snippets are in the works and should be available soon.
-
 
 ## Requirements
 This extension will be activated on any file that has the .spw extension
@@ -90,5 +88,22 @@ Fixed bug that prevented go to definition from working when a LOGIC program was 
 
 ### Version 1.2.7
 Fixed bug that was causing ceratin database fields to be displayed as keywords
+
+### Version 1.2.8
+Fixed a bug that was causing snippets to not work
+
+Current Snippet short cuts
+```
+    if then: Insert an IF THEN block
+    if then begin: Insert an IF THEN BEGIN block
+    for do begin: Insert a FOR DO BEGIN loop
+    for selected do: Insert a FOR SELECTED DO loop
+    lc: Insert a line comment
+    bc: Insert a block comment
+    dcl: Declare a variable
+    dclf: Declare a file
+    echoVar: Insert an echo command with variable
+    echoText: Insert a text only echo command
+```
 -----------------------------------------------------------------------------------------------------------
 
