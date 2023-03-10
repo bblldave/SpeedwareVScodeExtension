@@ -1,5 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpwDefinitionProvider = void 0;
 const vscode = require("vscode");
 class SpwDefinitionProvider {
     constructor() {

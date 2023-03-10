@@ -1,5 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.activate = void 0;
 const vscode = require("vscode");
 const spwHoverProvider_1 = require("./hover/spwHoverProvider");
 const spwDefinitionProvider_1 = require("./goToDefinition/spwDefinitionProvider");

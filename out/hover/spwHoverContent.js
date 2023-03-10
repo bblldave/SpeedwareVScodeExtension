@@ -1,5 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpwHoverContent = void 0;
 class SpwHoverContent {
     constructor() {
         this.functions = {

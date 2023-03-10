@@ -1,5 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpwHoverProvider = void 0;
 const vscode = require("vscode");
 const spwHoverContent_1 = require("./spwHoverContent");
 class SpwHoverProvider {
