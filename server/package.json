@@ -1,0 +1,18 @@
+{
+	"name": "speedware",
+	"displayName": "Speedware",
+	"description": "VS Code support for the Speedware Language",
+	"version": "1.3.0",
+	"publisher": "davidharrisjr",
+	"icon": "Assets/Speedware.PNG",
+	"repository": {
+		"url": "https://github.com/bblldave/SpeedwareVScodeExtension.git"
+	},
+	"engines": {
+		"node": "*"
+	},
+	"dependencies": {
+		"vscode-languageserver": "^8.1.0",
+		"vscode-languageserver-textdocument": "^1.0.8"
+	}
+}
