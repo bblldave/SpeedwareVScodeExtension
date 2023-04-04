@@ -15,7 +15,7 @@ let lexer = moo.compile({
   blockComment: {match: /#NOTE(?:[\s\S]*?)#ENDNOTE/, lineBreaks: true},
   object: /(?:~?(?:#\s*[a-zA-Z_-][a-zA-Z0-9_-]*[a-zA-Z0-9]|(?:[a-zA-Z_-][a-zA-Z0-9_-]*[a-zA-Z0-9])))/,
   lineComment: {match: /\(\*[\s\S]*?\*\)(?![^(\n]*\))/, lineBreaks: true},
-  NL: { match: /\r\n|\n/, lineBreaks: true },
+  'NL': { match: /\r?\n/, lineBreaks: true },
   WS: {match: /[\s\t]+/, lineBreaks: true},
   number: /0|[1-9][0-9]*/,
   string: /(?:["'])(?:\\\1|(?!\\1).)*\1/,

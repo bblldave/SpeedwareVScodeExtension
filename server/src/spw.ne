@@ -11,7 +11,7 @@ statements
   | statement (%NL statement):*
 
 statement
-  -> _ %verb _ object _ option_list:? _ parameter_list:? %semiColon _ %lineComment:? 
+  -> _ %verb _ object _ option_list:? _ parameter_list:? %semiColon _ %lineComment:?
     {%
       (data) => {
         return {
@@ -37,7 +37,7 @@ parameter -> %parameter %assign (%string | %number | %object | %subtype | %stora
 parameter_list -> parameter (%comma _ parameter):*
 
 var_assignment
-  -> %object _ %assign _ expression _ %semiColon _ %lineComment:? 
+  -> %object _ %assign _ expression _ %semiColon _ %lineComment:?
     {%
       (data) => {
         return {
