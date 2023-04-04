@@ -1,0 +1,1896 @@
+REPORT-LOAD-MAIN:
+    DCL CL-ACCT-FILE FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-ADJ-CODE FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL CL-CONFLICT-INS FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-DEF-INS(2) FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL CL-ENCTR-CHK FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-FAM-BILLING FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-INS-PRINT FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-LIVE-DT FORMAT(SUBTYPE=DATE);
+    DCL CL-LOAD-ADJ FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-LOAD-CHG FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-LOAD-LOAD-D FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-LOAD-OLD-DOS FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL CL-LOAD-REC FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-LOAD-ROSTER FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-ML-OVERRIDE FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-MOD-CHK FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-PHYS-EXC-CHK FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-REC-CODE FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL CL-ROST-MRN-FLAG FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-STMNT-PRINT FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-UPDATE-INS FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-UPDATE-PT-ADD FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL CL-USE-CHG-AMT FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-ACCOUNT FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-ACCT-NAME FORMAT(TYPE=CHAR,LENGTH=30,SUBTYPE=ALPHA);
+    DCL LV-ACCT-NUM FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-ADDR-UPDATED FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ADJ-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-ADJ-CODE FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-ADMIT-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-AMT-LD FORMAT(TYPE=INT,LENGTH=12,DECIMAL=2,SUBTYPE=NUMERIC);
+    DCL LV-AMT-RPT FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-BAD-HOLD FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-BAD-INS LIKE(NAME=INSCO-CODE);
+    DCL LV-BATCH FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-BILL-GRP FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-BTCH-CNT FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-C-CHG-CNT FORMAT(TYPE=INT,LENGTH=8,SUBTYPE=NUMERIC);
+    DCL LV-C-DEM-CNT FORMAT(TYPE=INT,LENGTH=8,SUBTYPE=NUMERIC);
+    DCL LV-C-DEMO-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-C-ERR-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-C-ERR-MSG FORMAT(TYPE=CHAR,LENGTH=90,SUBTYPE=ALPHA);
+    DCL LV-C-INS-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-C-TRAN-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-CC FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-CHG-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-CHG-CRS-TMP FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-CHG-LOADED FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-CNT FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-CNT-2 FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-CNT-3 FORMAT(TYPE=INT,LENGTH=4,BYTES=4,SUBTYPE=NUMERIC);
+    DCL LV-CO-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-CO-PROC FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-CONTRACT-NUM FORMAT(TYPE=CHAR,LENGTH=24,SUBTYPE=ALPHA);
+    DCL LV-CPT-KEY FORMAT(TYPE=CHAR,LENGTH=26,SUBTYPE=ALPHA);
+    DCL LV-CR-REASON-TMP FORMAT(TYPE=CHAR,LENGTH=16,SUBTYPE=ALPHA);
+    DCL LV-CRIT-AMT-LD FORMAT(TYPE=INT,LENGTH=12,DECIMAL=2,SUBTYPE=NUMERIC);
+    DCL LV-CRS-FLAG FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-CRS-ID FORMAT(TYPE=CHAR,LENGTH=10,SUBTYPE=ALPHA);
+    DCL LV-CRS-REASON FORMAT(TYPE=CHAR,LENGTH=16,SUBTYPE=ALPHA);
+    DCL LV-CRS-STATUS FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-CTR FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-CURR-ACCT FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-D-ERR-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-D-ERR-MSG FORMAT(TYPE=CHAR,LENGTH=90,SUBTYPE=ALPHA);
+    DCL LV-DB-LOC FORMAT(TYPE=CHAR,LENGTH=64,SUBTYPE=ALPHA);
+    DCL LV-DEF-ASSISTANT FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-DEF-DEPT FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-DEF-DIVISION FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-DEF-INST FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-DEF-SPECIALTY FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-DEMO-LOADED FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-DEMO-PHYS FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-DIAG(4) FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-DIAG-1 FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-DIAG-2 FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-DIAG-3 FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-DIAG-4 FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-DIAG-BREAK FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-DIAG-HLD-CODE FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-DIAG-PTR(4) FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-DISCHG-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-DOS-FND FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-DUP-FOUND FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-DX(24) FORMAT(TYPE=CHAR,LENGTH=10,SUBTYPE=ALPHA);
+    DCL LV-DX-METHOD FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-ERR FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-ERR-DESC FORMAT(TYPE=CHAR,LENGTH=60,SUBTYPE=ALPHA);
+    DCL LV-ERR-PAGE FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ERR-PAT-NAME FORMAT(TYPE=CHAR,LENGTH=34,SUBTYPE=ALPHA);
+    DCL LV-ERR-ROSTER FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-ERR-TYPE FORMAT(TYPE=CHAR,LENGTH=16,SUBTYPE=ALPHA);
+    DCL LV-FILE-CNT FORMAT(TYPE=INT,LENGTH=7,SUBTYPE=NUMERIC);
+    DCL LV-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-FOUND-CAT FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-GO-BIRTH-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-GRP FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-HARP-HOLD FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-HO-VALID FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-HOLD-CHG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-HOLD-CODE FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-HOSP FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-I10-CTR FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ICD-9-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-ICD-ADDED FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ICD-ERR FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ICD-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ICD-TYPE FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-INS-ADDR FORMAT(TYPE=CHAR,LENGTH=6,SUBTYPE=ALPHA);
+    DCL LV-INS-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-INS-CODE FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-INS-CODE-REJ FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-INS-CODE-TMP FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-INS-CPT-CAT FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-INS-DX-CAT FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-INS-INS-CAT FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-INS-KEY FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-INS-NAME LIKE(NAME=IO-INS-NAME);
+    DCL LV-INS-REJ-FND FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-INS-SEQ FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-KEY FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-LEN FORMAT(TYPE=INT,LENGTH=4,SUBTYPE=NUMERIC);
+    DCL LV-LOAD-ID FORMAT(TYPE=INT,LENGTH=8,SUBTYPE=NUMERIC);
+    DCL LV-LOAD-LOC FORMAT(TYPE=CHAR,LENGTH=19,SUBTYPE=ALPHA);
+    DCL LV-LOAD-MBR FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-LOOP FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-LOOP2 FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-LOOP3 FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-MLINK-CODE FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-MLINK-IND FORMAT(TYPE=INT,LENGTH=4,SUBTYPE=NUMERIC);
+    DCL LV-MOD-1 FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-MOD-2 FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-MOD-ERR FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-MSG FORMAT(TYPE=CHAR,LENGTH=72,SUBTYPE=ALPHA);
+    DCL LV-MSG-TYPE FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-N-ERR-PAGE FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-NC-CHG-CNT FORMAT(TYPE=INT,LENGTH=8,SUBTYPE=NUMERIC);
+    DCL LV-NC-CHG-FND FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-NC-DEM-CNT FORMAT(TYPE=INT,LENGTH=8,SUBTYPE=NUMERIC);
+    DCL LV-NC-DEM-FND FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-NC-DEMO-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-NC-INS-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-NC-TRAN-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-NEW-TICK-STR FORMAT(TYPE=CHAR,LENGTH=148,SUBTYPE=ALPHA);
+    DCL LV-NEXT-MLINK FORMAT(TYPE=INT,LENGTH=4,SUBTYPE=NUMERIC);
+    DCL LV-NO-PRT-C-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-NO-PRT-D-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-NON-AMT-LD FORMAT(TYPE=INT,LENGTH=12,DECIMAL=2,SUBTYPE=NUMERIC);
+    DCL LV-OB-CHG-CTR FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-OB-MEDREC-NUM FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-OB-PAT-F-NAME FORMAT(TYPE=CHAR,LENGTH=11,SUBTYPE=ALPHA);
+    DCL LV-OB-PAT-L-NAME FORMAT(TYPE=CHAR,LENGTH=20,SUBTYPE=ALPHA);
+    DCL LV-OB-PAT-M-INIT FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-OBCHG-FOUND FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-ONSET-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-P-ACCT-NUM FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-PANEL-CODE FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-PANEL-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-PANEL-KEY FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-PAT-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-PHYS-EXC-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-PHYS-FEE-SET FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-PLACE FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-PO-BIRTH-DT FORMAT(SUBTYPE=DATE);
+    DCL LV-POS FORMAT(TYPE=INT,LENGTH=4,SUBTYPE=NUMERIC);
+    DCL LV-PRACT-CODE FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-PRE-TICK-STR FORMAT(TYPE=CHAR,LENGTH=148,SUBTYPE=ALPHA);
+    DCL LV-PREV-ACCT FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-PREV-ROST FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-PRICE-FLAG FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-PRN-INS FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-PRN-STMNT FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-PROC FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-PROC-CNT FORMAT(TYPE=INT,LENGTH=4,BYTES=4,SUBTYPE=NUMERIC);
+    DCL LV-PT-DECEASED FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-PT-F-NAME-FULL FORMAT(TYPE=CHAR,LENGTH=20,SUBTYPE=ALPHA);  (* HD803927 - EDM - 20171211 *)
+    DCL LV-PT-L-NAME-FULL FORMAT(TYPE=CHAR,LENGTH=26,SUBTYPE=ALPHA);  (* HD803927 - EDM - 20171211 *)
+    DCL LV-REC-CNT FORMAT(TYPE=INT,LENGTH=6,SUBTYPE=NUMERIC);
+    DCL LV-REC-CODE FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-REC-TYPE FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-REFERRAL FORMAT(TYPE=CHAR,LENGTH=8,SUBTYPE=ALPHA);
+    DCL LV-ROSTER-FLAG FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-RPT-FLAG FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-RST-ADDRESS FORMAT(TYPE=CHAR,LENGTH=48,SUBTYPE=ALPHA);
+    DCL LV-RST-CITY FORMAT(TYPE=CHAR,LENGTH=16,SUBTYPE=ALPHA);
+    DCL LV-RST-COUNTRY FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-RST-DOB FORMAT(SUBTYPE=DATE);
+    DCL LV-RST-MISC(4) FORMAT(TYPE=CHAR,LENGTH=32,SUBTYPE=ALPHA);
+    DCL LV-RST-MRN FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-RST-NAME FORMAT(TYPE=CHAR,LENGTH=34,SUBTYPE=ALPHA);
+    DCL LV-RST-SEX FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-RST-SS FORMAT(TYPE=CHAR,LENGTH=10,SUBTYPE=ALPHA);
+    DCL LV-RST-STATE FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-RST-ZIP FORMAT(TYPE=CHAR,LENGTH=10,SUBTYPE=ALPHA);
+    DCL LV-RST-ZIP-4 FORMAT(TYPE=INT,LENGTH=4,BYTES=4,SUBTYPE=NUMERIC);
+    DCL LV-SELF-PAY FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-SEND-CHG-CRS FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-SEND-HARP-HLD FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-SEQ FORMAT(TYPE=INT,LENGTH=4,SUBTYPE=NUMERIC);
+    DCL LV-SEQ-NUM FORMAT(TYPE=CHAR,LENGTH=2,SUBTYPE=ALPHA);
+    DCL LV-SEQ-STR FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-SOC FORMAT(TYPE=FLOAT,LENGTH=11,DECIMAL=2,BYTES=8,SUBTYPE=NUMERIC);
+    DCL LV-SOC-SEC-NUM FORMAT(TYPE=CHAR,LENGTH=10,SUBTYPE=ALPHA);
+    DCL LV-SSN FORMAT(TYPE=CHAR,LENGTH=11,SUBTYPE=ALPHA);
+    DCL LV-STMNT-ZIP FORMAT(TYPE=CHAR,LENGTH=11,SUBTYPE=ALPHA);
+    DCL LV-STMNT-ZIP-4 FORMAT(TYPE=CHAR,LENGTH=5,SUBTYPE=ALPHA);
+    DCL LV-TEMP-CNT FORMAT(TYPE=INT,LENGTH=3,SUBTYPE=NUMERIC);
+    DCL LV-TEMP-DEPT FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-TEMP-PRIOR FORMAT(TYPE=CHAR,LENGTH=30,SUBTYPE=ALPHA);
+    DCL LV-TEMP-UNITS FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+    DCL LV-TICKET FORMAT(TYPE=INT,LENGTH=8,SUBTYPE=NUMERIC);
+    DCL LV-TINF-ENCTR FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+    DCL LV-UPDATED-INS FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCL LV-USE-CHG-AMT FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-USE-HO-LD-ID FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-USE-MON-SYS FORMAT(TYPE=CHAR,LENGTH=1,SUBTYPE=ALPHA);
+    DCL LV-ZIP-CODE FORMAT(TYPE=CHAR,LENGTH=11,SUBTYPE=ALPHA);
+    DCL LV-ZIP-CODE-4 FORMAT(TYPE=CHAR,LENGTH=5,SUBTYPE=ALPHA);
+    DCL LV-CONTACT-ID FORMAT(TYPE=ZONE,BYTES=6,SUBTYPE=NUMERIC,LENGTH=6,DECIMAL=0);
+    DCL LV-Mlink-Skip FORMAT(TYPE=INT,LENGTH=1,SUBTYPE=NUMERIC);
+    DCLPRINTER PRINTER-FILE ASSIGN(DEVICE=SYSTEM3,WIDTH=132,HEIGHT=60,
+                                   SPOOLNAME=(GV-Spoolname)) DEFAULT;
+    DCLPRINTER PRINTER-FILE2 ASSIGN(DEVICE=SYSTEM3,WIDTH=132,HEIGHT=60,
+                                    SPOOLNAME=(GV-File));
+    DCLPRINTER PRINTER-FILE3 ASSIGN(DEVICE=SYSTEM3,WIDTH=132,HEIGHT=60,
+                                    SPOOLNAME=(GV-File2));
+    #IFNDEF MPEXL
+      DCLFILE LOAD-FILE IS(LOAD-FILE) LOCATION($TRIM(GV-File3,RIGHT));
+      DCLFILE FILE-132 IS(FILE-132) LOCATION($TRIM(GV-File4,RIGHT));
+      DCLFILE ACCT-FILE IS(ACCT-FILE) LOCATION($TRIM(GV-File5,RIGHT));
+    #ENDIF
+    #INCLUDE-Mlink-lib
+    #NOTE
+    Inits  Enhancement/Fix                                      Requester   Date
+    --------------------------------------------------------------------------------
+    JRC    The load will report if a patient has their primary  Kathy N     02/19/01
+           insurance on a rejected status.
+
+    JRC    Enhancement was made to allow member codes for an    n/a         02/20/01
+           account with multiple loads.  The jobstream for the
+           load needs to pass the member code as a parameter.
+           If left blank, it defaults to 'LOAD'.
+
+    JRC    The CRS installation enhancement was completed.      n/a         02/20/01
+
+    JRC    I made an update to not allow a blank address to     Pat T       04/10/01
+           overwrite an existing address when the client parm
+           to update patient's address is set to 'Y'.
+
+    JRC    If the CPT code is 'N/C' then load chg on BP hold.   Mary Jo     04/10/01
+
+    JRC    The Harp EDI Error Maintenance screen was moved      JRC         05/14/01
+           into 2.14 design for live testing.
+
+    JRC    The defaults of entities based upon the physician    Pat T       05/22/01
+           has been modified to go back to the physician
+           defaults when the Phys/Loc level are blank.
+
+    JRC    The 'Load Old DOS' flag was added to the Load        Mike K      06/19/01
+           Parameters screen. The LOAD-CO and LOAD-CLIENT-PARM
+           documents were updated, as well as PARM-LOAD prgrm.
+
+    JRC    I added a variable in order to correctly print the   Lauri P     07/06/01
+           dollar amount to the Loaded Report when a dollar
+           amount override was entered.
+
+    JRC    A date of service counter was added to keep track    n/a         10/05/01
+           of the service dates for the new Load Monitoring
+           System.
+
+    JRC    I added a variable to check if the account is        n/a         12/18/01
+           using the Harp EDI Monitoring System.
+
+    JRC    I added logic for the Harp EDI Monitoring System.    n/a         12/19/01
+
+    JRC    I added an enhancement to show a non-critical error  Judy V      01/08/02
+           if the primary insurance passed in the loadfile is
+           different from the patient's primary insurance on
+           file in Harp.
+
+    JRC    I added logic to reset the LV-HOLD-CODE variable to  n/a         01/30/02
+           SPACES if the charges are not to be sent to Harp on
+           a hold code from a demographic non-critical error.
+
+    JRC    I added logic to accept a patient default physician  Phil C      02/07/02
+           and location passed in the load file.
+
+    JRC    I added logic to LOAD-D to load a discount %.        Judy V      02/20/02
+
+    JRC    I added logic to abort the load if LV-ACCT-NUM was   n/a         02/20/02
+           equal to SPACES.
+
+    JRC    I added logic to load insurance subscriber info.     Judy V      03/18/02
+
+    JRC    The multi-link logic was fixed.                      Judy V      04/10/02
+
+    JRC    I changed the LV-RST-MRN to x12 - it was previously  Angie H     06/06/02
+           defined as x10 and causing problems in PF.
+
+    JRC    I modified the search thru DOS-M to be a key read    n/a         07/10/02
+           instead of the serial read it was doing.
+
+    JRC    I added the Location field back as part of the       Mary Jo     07/29/02
+           duplicate charge check.
+
+    JRC    I set LV-LOAD-ID in the LOAD-CO document for any     n/a         09/13/02
+           charges from the CRS.
+
+    JRC    I modified Panel Code logic in the LOAD-CO doc.      n/a         01/16/03
+
+    JRC    I added logic to use primary insurance getting       n/a         03/18/03
+           billed as part of the ticket break string.
+
+    SEH    I added encounter number to all 3 reports.           n/a         04/14/03
+
+    SEH    The 'Enctr Dup Chk' flag was added to the Load       n/a         05/09/03
+           Parameters screen. The LOAD-CO and LOAD-CLIENT-PARM
+           documents were updated, as well as PARM-LOAD prgrm.
+
+    JRC    I added logic to default the entities based upon     Mike        05/16/03
+           the referral, only when the default entities are
+           blank.
+
+    JRC    I added logic to pass the Down Code values to the    n/a         05/22/03
+           TCCHG-D dataset.
+
+    JRC    I added logic for the ROI and Patient Signature      n/a         05/23/03
+           flags.
+
+    JRC    I made LV-INS-CODE-TMP default to 'SELF'.            n/a         05/23/03
+
+    SEH    I added logic to pass COUNTRY to PATIENT-D.          n/a         07/30/03
+
+    JRC    I fixed the logic to print the adjustment info       n/a         10/28/03
+           when an adjustment line is loaded to Harp.
+
+    JRC    I added logic to track the sending system and        n/a         10/28/03
+           personnel for registrations and transactions.
+
+    JRC    I modified the Load-Co document to not assume that   n/a         01/21/04
+           a ticket with insurance being resequenced is not
+           going to the same primary carrier.
+
+    JRC    I added logic for Share of Cost to the Load-Co doc.  Judy V      01/22/04
+
+    JRC    I added logic to pass a posting date to load to the  Judy V      01/23/04
+           chg-entry-dt field.
+
+    JRC    I added logic to load the admit/dischg times.        Laura Mc    01/26/04
+
+    JRC    I added logic to load the account type to the demo   n/a         04/29/04
+           screen.
+
+    JRC    I added logic to load the ABN indicator to the Auto  Judy V      05/20/04
+           EDI screen.
+
+    ST1    I added logic to pass entry operator to PATIENT-D.   Phil C      06/16/04
+
+    ST1    I added logic to reformat the zip codes for          n/a         07/28/04
+           international cases.
+
+    JRC    I added a new error code, CKPHYSLOC CHG, for non-    Pat T       08/31/04
+           chargeable physicians by location.
+
+    ST1    Added logic to pass the Message Type to Harp.        Judy V.     12/08/04
+
+    DJH    Added logic for Windows and UNIX                     n/a         05/25/05
+
+    ST1    Added logic for Physician Exclusion Edit             n/a         10/13/05
+
+    TW     Added Accession# in TCCHG-D and Req-Num#  in
+           TCTICKET-D in document LOAD-CO                       n/a         12/12/05
+
+    ST1    Added logic for Modifier Duplicate check             Mary Jo     01/18/06
+
+    JRC    Logic added to load Roster flag to LOAD-D and load   n/a         06/29/06
+           misc date to Harp.
+
+    JRC    Logic added to handle ambulance billing.             Gina J      11/20/06
+
+    JRC    Logic added for modifier duplicate check for Roster  HD222246    07/01/09
+           transactions. #14959
+
+    JRC    Add logic to dup check to bypass CHG-D record if     HD224600    07/22/09
+           marked as charged in error or reverse charge.        Proj 15009
+
+    JRC    Add logic to correctly pull the modifier based on    HD224600    07/22/09
+           the physician location fee hierarchy.                Proj 15009
+
+    JRC    Added logic to create a file of acct numbers.        HD283569    10/26/10
+                                                                Proj 17092
+
+    MZEL   Added logic to populate country code.                HD272044    05/11/11
+                                                                Proj 17603
+
+    JRC    Added logic to populate case code.                   HD272044    05/12/11
+                                                                Proj 17603
+
+    JRC    Added logic to populate SSN-4, mod 3, and mod 4.     HD335735    11/08/11
+                                                                Proj 18573
+
+    JW     Validate hold category parm.                         Proj 18261  12/5/11
+
+    JRC    Added logic to process Z code.                       Proj 18881  04/19/12
+
+    JRC    Fixed logic to allow a SPACE in Roster Account num.  HD368158    05/16/12
+                                                                Proj 19252
+    EDM    Changed logic to validate Onset Date.                HD388186    08/30/12
+           No longer remove Onset Date older than one year.     Proj 19537
+
+    EDM    Updated logic in LOAD-I to not apply SSN to empty    Proj 19965  01/08/13
+           Ins Contract number.                                 HD406758
+
+    JRC    Updated LOAD-ROSTER document to first LJU the rost   Proj 20119  02/21/13
+           acct number, since the field is defined as 16 char.
+
+    JRC    Updated LOAD-PO for increase of address fields.      Proj 19528  02/21/13
+
+    JRC    Added PAS pre-billing flag and non-pt flag to the    Proj 20632  08/08/13
+           document LOAD-LOAD-D.                                HD432909
+
+    JRC    Added logic to process tracking codes.               Proj 21350  01/23/14
+                                                                HD471920
+
+    JRC    Added logic to store Control ID, Signout date, and   Proj 21428  04/02/14
+           Case ID (Genoptix).                                  HD468497
+
+    JRC    Added logic to set Roster MRN using patient account  Proj 22065  08/05/14
+           number or patient medical record.                    HD511262
+
+    JRC    Added logic to temporarily use TCTICK-ENTITY to      Proj 21384  08/28/14
+           store the prior auth field.  Field increased from    HD417438
+           18 to 30 chars, but TCTICK-PRI-AUTH not updated with
+           last db update project.
+
+    JRC    Add requisition number as part of criteria to split  Proj 22368  10/02/14
+           ticket;                                              HD531821
+
+    JRC    Added logic for ICD-10 updates.                      Proj 21425  12/10/14
+                                                                HD478605
+
+    JRC    Added logic for ICD-10 additions to AutoEDI and the  Proj 23205  09/10/15
+           date fields to TCCHG-D for the OSM project.          HD577613
+
+    JRC    Updated logic to process D0 record for header rec    Proj 23582  09/20/15
+           type of DEM.                                         HD577613
+
+    JRC    Updated LOAD-I to include entire zip code.           Proj 23820  01/05/16
+                                                                HD623919
+
+    PjH    Updated LOAD-PO to set contact ID on patient entry   HARP-111    06/13/16
+                                                                HD680912
+    BJS    Multilink updates                                    HARP-45     09/08/16
+
+    JRC    Upddates for additional-charge related info and      HPEDI-551   12/20/16
+           additional patient demo-related info.
+           
+    EDM    Field size increased for Patient First and Last      HD803927    12/11/17
+           Names and Case Code.  New MPI patient field added.   HEK-180
+
+    M&M    Remove partial search from HARP duplicate check      HD973938    05/01/19
+           (to ROSTER-D) and replace with an exact search.      HARP-2028
+
+    M&M    Buffering incremental billing value into turbo       HD1045656   12/09/19
+           charged dataset.                                     HARP-2369
+
+    M&M    Buffering expected amount flag into turbo charged    HD1029364   12/09/19
+           dataset.                                             HARP-2368
+
+    M&M    Added policy number to insurance check allowing      HD1123591   06/30/20
+           multiple insurances with the same insurance code to  HARP-2636
+           be added under an account, given that policy
+           numbers differ.
+
+    M&M    Renamed C1 segment CX since CX really is charge/     HARP-2900  06/18/21
+           insurance related information.  Created a new C1
+           segment that is truly just overflow for C0.
+
+    #ENDNOTE
+    SUBSECTION MultiLinkError:
+      PARM _KEY FORMAT(TYPE=CHAR,LENGTH=12,SUBTYPE=ALPHA);
+      PARM _DATE LIKE(CO-DT);
+      PARM _INS FORMAT(TYPE=CHAR,LENGTH=4,SUBTYPE=ALPHA);
+
+      GV-LogInfo = " SHOW TO SYSTEMS: Error obtaining Multi Link Information";
+      #INCLUDE-LogEcho
+      GV-LogInfo = " Key: " + _KEY + "Date: " + _DATE + "Ins: " + _INS;
+      #INCLUDE-LogEcho
+      GV-LogInfo = " Charge added to critical error report";
+      #INCLUDE-LogEcho
+      LV-KEY      = "EDIERROR",
+      LV-ERR-TYPE = "CKPROC MLINK" + SPACES;
+      #INCLUDE-LD-CRIT-CHG
+    ENDSUB;
+
+    (* JRC 02/20/01 - Parameter passed from LOADJOB jobstream, default if blank *)
+    GV-LoadMbr = PV-LOAD-MBR;
+    IF GV-LoadMbr = SPACES OR
+       GV-LoadMbr = "LOAD" THEN GV-LoadMbr = "LOAD";
+                            ELSE GV-LoadMbr = $LJU($TRIM("LD" + GV-LoadMbr));
+
+    GV-Abort = 0;
+    #INCLUDE-LOAD-CLIENT-PARM
+    #INCLUDE-LOAD-CHECK-PARMS
+    IF GV-Abort THEN BEGIN
+      LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd) +" ACCT, PLEASE INVESTIGATE!";
+      #INCLUDE-LOAD-ABORT
+    END;
+
+    FOR OP-CLIENT-M<OPCL-CLIENT:GV-AcctCd> DO BEGIN
+      IF $LEN($TRIM(OPCL-ELOQ-PORT)) THEN BEGIN
+        LV-DB-LOC = ":" + $TRIM(OPCL-ELOQ-PORT) + "/obinfo";
+        IF $LEN($TRIM(OPCL-ELOQ-SERVER)) THEN
+          LV-DB-LOC = $TRIM(OPCL-ELOQ-SERVER) + LV-DB-LOC;
+      END;
+    END;
+
+    (* Init count vars *)
+    LV-PAT-CNT = 0, LV-INS-CNT = 0, LV-CHG-CNT = 0, LV-REC-CNT = 0, LV-ADJ-CNT = 0,
+    LV-FILE-CNT = 0;
+    SELECT * FROM LOAD-FILE;
+    FOR LOAD-FILE SELECTED DO BEGIN
+    CASE LOAD-REC-TYPE[1:1] OF
+    "H": BEGIN  (* Header Record *)
+           LV-LOAD-LOC = LOAD-REC-ALL[13:42];
+           #INCLUDE-LOAD-HO
+           (* Set LV-LOAD-ID *)
+           LV-USE-HO-LD-ID = "N";
+           IF HO-LOAD-TYPE <> "CRS" THEN BEGIN
+             LV-LOAD-ID = $NUM(HO-LOAD-ID),
+             LV-USE-HO-LD-ID = "Y";
+           END;
+         END;
+    "P": BEGIN  (* Patient Information *)
+           CASE LOAD-REC-TYPE[2] OF
+             "0" : BEGIN
+                     (* Init vars for new patient *)
+                     #INCLUDE-INIT-LD-PAT-VARS
+
+                     (* LOAD ROSTER *)
+                     IF CL-LOAD-ROSTER = "Y" AND $LEN($TRIM(PO-ROSTER-NUM)) THEN BEGIN
+                       LV-ROSTER-FLAG = 1;
+                       #INCLUDE-LOAD-ROSTER
+                     END;
+                     IF LV-ROSTER-FLAG = 0 THEN BEGIN
+                       #INCLUDE-LOAD-PO
+                     END;
+
+                     (* Set Loadstat Error Vars *)
+                     IF LV-NC-DEM-FND = 1 THEN LV-NC-DEM-CNT = LV-NC-DEM-CNT + 1;
+                     IF LV-D-ERR-FLAG = 3 THEN LV-C-DEM-CNT  = LV-C-DEM-CNT + 1;
+
+                     (* Set Vars for CRS Entry *)
+                     LV-OB-PAT-L-NAME = PO-L-NAME,
+                     LV-OB-PAT-F-NAME = PO-F-NAME,
+                     LV-OB-PAT-M-INIT = PO-M-INIT,
+                     LV-OB-MEDREC-NUM = PO-MED-REC-NUM;
+
+                     (* Set Charge Error Flag = 3 due to Critical Demo Error *)
+                     IF LV-D-ERR-FLAG = 3 THEN LV-C-ERR-FLAG = 3;
+
+                     (* If a Non-crit Error is not printed or sent to CRS, add to counter *)
+                     IF LV-NC-DEM-FND = 1 AND LV-D-ERR-FLAG <> 1 AND
+                        LV-SEND-CHG-CRS <> 1 THEN LV-NO-PRT-D-CNT = LV-NO-PRT-D-CNT + 1;
+
+                     (* Set Patient CRS Flags *)
+                     LV-CHG-CRS-TMP   = LV-SEND-CHG-CRS;
+                     LV-CR-REASON-TMP = LV-CRS-REASON;
+                   END;
+             "1" : BEGIN
+                     IF LV-D-ERR-FLAG <> 3 AND
+			LV-ROSTER-FLAG = 0 THEN BEGIN
+                       #INCLUDE-LOAD-P1
+                     END;
+                   END;
+           ENDCASE;
+         END;
+    "Q": BEGIN  (* Miscellaneous Records for Rosters *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           IF LV-ROSTER-FLAG THEN BEGIN
+             #INCLUDE-LOAD-QO
+           END;
+         END;
+    "G": BEGIN  (* Guarantor Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           LV-NC-DEM-FND = 0;
+           (* Don't Do Edit when Critical Demographic Error or its a Roster *)
+           IF LV-D-ERR-FLAG <> 3 AND LV-SEND-CHG-CRS <> 3 AND
+              LV-ROSTER-FLAG = 0 THEN BEGIN
+             LV-D-ERR-FLAG = 0;
+             #INCLUDE-LOAD-GO
+
+             (* If a Non-crit Error is not printed or sent to CRS, add to counter *)
+             IF LV-NC-DEM-FND = 1 AND LV-D-ERR-FLAG <> 1 AND
+                LV-SEND-CHG-CRS <> 1 THEN LV-NO-PRT-D-CNT = LV-NO-PRT-D-CNT + 1;
+
+             (* Set Guar CRS Flags *)
+             IF LV-SEND-CHG-CRS = 1 THEN BEGIN
+               LV-CHG-CRS-TMP   = LV-SEND-CHG-CRS;
+               LV-CR-REASON-TMP = LV-CRS-REASON;
+             END;
+           END;
+         END;
+    "I": BEGIN  (* Insurance Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           LV-NC-DEM-FND = 0;
+           (* Don't Do Edit when Critical Demographic Error or its a Roster *)
+           IF LV-D-ERR-FLAG <> 3 AND LV-SEND-CHG-CRS <> 3 AND
+              LV-ROSTER-FLAG = 0 THEN BEGIN
+             LV-D-ERR-FLAG = 0;
+             #INCLUDE-LOAD-I
+
+             (* Set Loadstat Error Vars *)
+             IF LV-NC-DEM-FND = 1 THEN LV-NC-INS-CNT = LV-NC-INS-CNT + 1;
+             IF LV-D-ERR-FLAG = 3 THEN LV-C-INS-CNT  = LV-C-INS-CNT + 1;
+
+             (* If a Non-crit Error is not printed or sent to CRS, add to counter *)
+             IF LV-NC-DEM-FND = 1 AND LV-D-ERR-FLAG <> 1 AND
+                LV-SEND-CHG-CRS <> 1 THEN LV-NO-PRT-D-CNT = LV-NO-PRT-D-CNT + 1;
+
+             (* Set Insurance CRS Flags *)
+             IF LV-SEND-CHG-CRS = 1 THEN BEGIN
+               LV-CHG-CRS-TMP   = LV-SEND-CHG-CRS;
+               LV-CR-REASON-TMP = LV-CRS-REASON;
+             END;
+           END;
+         END;
+    "E": BEGIN  (* Employer Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           (* Don't Do Edit when Critical Demographic Error or its a Roster *)
+           IF LV-D-ERR-FLAG <> 3 AND LV-ROSTER-FLAG = 0 THEN BEGIN
+             LV-D-ERR-FLAG = 0;
+             #INCLUDE-LOAD-E
+           END;
+         END;
+    "C": BEGIN  (* Charge Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           CASE LOAD-REC-TYPE[2] OF
+             "0" : BEGIN
+                     (* Init Non-critical Charge Found flag *)
+                     LV-NC-CHG-FND = 0;
+                     (* 10/22/99 TWC #4515  Load LOAD-D for charge loads now. *)
+                     (*                     Removed CL-LOAD-CHG <> "Y"        *)
+                     (* JRC 09/02/15 HD577613 Proj 23205 for ICD-10 Purposes *)
+                     LV-CO-PROC = CO-PROC,
+                     LV-CO-DT   = CO-DT;
+                     IF CL-LOAD-LOAD-D = "Y" AND LV-ROSTER-FLAG = 0 THEN BEGIN
+                       #INCLUDE-LOAD-LOAD-D
+                     END;
+                     IF CL-LOAD-CHG = "Y" THEN BEGIN
+                       (* Don't Do Edit when Critical Demographic Error *)
+                       IF LV-C-ERR-FLAG <> 3 AND LV-SEND-CHG-CRS <> 3 THEN BEGIN
+                         LV-CHG-LOADED   = 0,
+                         LV-C-ERR-FLAG   = 0;
+                         (* Default CRS flags from any Demo errors *)
+                         LV-SEND-CHG-CRS = LV-CHG-CRS-TMP,
+                         LV-CRS-REASON   = LV-CR-REASON-TMP;
+                         #INCLUDE-LOAD-CO
+    
+                         (* Set Loadstat Error Vars *)
+                         IF LV-NC-CHG-FND = 1 THEN LV-NC-CHG-CNT = LV-NC-CHG-CNT + 1;
+                         IF LV-C-ERR-FLAG = 2 THEN LV-C-CHG-CNT  = LV-C-CHG-CNT + 1;
+  
+                         IF LV-C-ERR-FLAG <> 2 AND LV-SEND-CHG-CRS <> 1 AND
+                            LV-SEND-CHG-CRS <> 2 THEN LV-CHG-LOADED = 1;
+                       END;
+                       (* CRS due to Crit Demo or Crit Chg Error or Non-Crit Error *)
+                       IF LV-SEND-CHG-CRS = 3 OR LV-SEND-CHG-CRS = 2 OR
+                          LV-SEND-CHG-CRS = 1 THEN BEGIN
+                         (* Check if CRS Database Exists *)
+                         $ERRSYS = 0;
+                         (* DJH 05.25.05 - Updated logic for other O/S *)
+                         #IFDEF MPEXL
+                           COMMAND("LISTF OBINFO.DATA." + $TRIM(GV-AcctCd,RIGHT) +
+                                   ">$NULL");
+                         #ELSE
+                           LOGIC-ELOQ-CHK-EXIST USING LV-DB-LOC;
+                         #ENDIF
+                         IF $ERRSYS = 0 THEN BEGIN
+                           (* Create CRS Record *)
+                           #INCLUDE-CREATE-OB-CHG-D
+                         END;
+                         ELSE BEGIN
+                           LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd) +
+                                  " ACCT BECAUSE CRS DATABASE DOES NOT EXIST!";
+                           #INCLUDE-LOAD-ABORT
+                         END;
+                       END;
+                       (* If a Non-crit Error is not printed or sent to CRS, add to counter *)
+                       IF LV-NC-CHG-FND = 1 AND LV-C-ERR-FLAG <> 1 AND
+                          LV-SEND-CHG-CRS <> 1 THEN LV-NO-PRT-C-CNT = LV-NO-PRT-C-CNT + 1;
+                       (* Total Loaded Amounts for Reports *)
+                       IF CL-USE-CHG-AMT = "Y" THEN BEGIN
+                         IF LV-C-ERR-FLAG = 2 OR LV-SEND-CHG-CRS = 2 THEN BEGIN
+                           LV-CRIT-AMT-LD = LV-CRIT-AMT-LD + ($NUM(CO-AMT)/100);
+                         END;
+                         ELSE LV-AMT-LD = LV-AMT-LD + ($NUM(CO-AMT)/100);
+
+                         (* Get non-critical dollar amount for reports *)
+                         IF LV-C-ERR-FLAG = 1 OR LV-SEND-CHG-CRS = 1 THEN BEGIN
+                           LV-NON-AMT-LD = LV-NON-AMT-LD + ($NUM(CO-AMT)/100);
+                         END;
+                       END;
+                     END;
+                     ELSE CONTINUE;
+                   END;
+             "1" : BEGIN
+                     IF LV-CHG-LOADED = 1 THEN BEGIN
+                       #INCLUDE-LOAD-C1
+                     END;
+                     ELSE BEGIN
+                       IF LV-SEND-CHG-CRS = 3 OR LV-SEND-CHG-CRS = 2 OR
+                          LV-SEND-CHG-CRS = 1 THEN BEGIN
+                       
+                       END;
+                     END;
+                   END;
+             "X" : BEGIN
+                     IF LV-CHG-LOADED = 1 THEN BEGIN
+                       #INCLUDE-LOAD-CX
+                     END;
+                     ELSE BEGIN
+                       IF LV-SEND-CHG-CRS = 3 OR LV-SEND-CHG-CRS = 2 OR
+                          LV-SEND-CHG-CRS = 1 THEN BEGIN
+                       
+                       END;
+                     END;
+                   END;
+           ENDCASE;
+         END;
+    "D": BEGIN
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           (* JRC 09/20/15 Meta 23582 - Removed IF statement for Load-D creation *)
+           CASE LOAD-REC-TYPE[2] OF
+             "0" : LV-DX-METHOD = "0";  (* ICD-10 *)
+           ENDCASE;
+
+           #INCLUDE-LOAD-D
+         END;
+    "R": BEGIN  (* Receipt Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           IF CL-LOAD-CHG = "Y" AND CL-LOAD-REC = "Y" THEN BEGIN
+             IF LV-CHG-LOADED THEN BEGIN
+               LV-C-ERR-FLAG = 0;
+               #INCLUDE-LOAD-RO
+             END;
+             ELSE BEGIN
+               LV-C-ERR-FLAG = 2;
+               LV-C-ERR-MSG = "No Charge loaded for Account";
+             END;
+           END;
+           ELSE CONTINUE;
+         END;
+    "A": BEGIN  (* Adjustment Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           IF CL-LOAD-CHG = "Y" AND CL-LOAD-ADJ = "Y" THEN BEGIN
+             IF LV-CHG-LOADED THEN BEGIN
+               LV-C-ERR-FLAG = 0;
+               #INCLUDE-LOAD-AO
+             END;
+             ELSE BEGIN
+               LV-C-ERR-FLAG = 2;
+               LV-C-ERR-MSG = "No Charge loaded for Account";
+             END;
+           END;
+           ELSE CONTINUE;
+         END;
+    "M": BEGIN;  (* Message Information *)
+           IF LV-ACCT-NUM = SPACES THEN BEGIN
+             LV-MSG="LOAD ABORTED IN "+$TRIM(GV-AcctCd)+", Pat Acct# Missing!";
+             #INCLUDE-LOAD-ABORT
+           END;
+
+           IF LOAD-REC-TYPE = "M0" AND LV-ROSTER-FLAG = 0 THEN BEGIN
+             IF LV-D-ERR-FLAG <> 3 THEN BEGIN
+               #INCLUDE-LOAD-MO
+             END;
+           END;
+           ELSE BEGIN
+             IF LV-CHG-LOADED THEN BEGIN
+               #INCLUDE-LOAD-MI
+             END;
+           END;
+         END;
+    "Z": BEGIN  (* Trailer Record *)
+           IF LV-USE-MON-SYS = "Y" THEN BEGIN
+             (* Update LDSTAT *)
+             IF LV-USE-HO-LD-ID = "Y" THEN BEGIN
+               SELECT * FROM STAT-D WHERE ST-LOAD-ID = LV-LOAD-ID;
+               FOR STAT-D SELECTED DO BEGIN
+                 ST-QDX-PAT-LOAD = LV-PAT-CNT,
+                 ST-QDX-INS-LOAD = LV-INS-CNT,
+                 ST-QDX-CHG-LOAD = LV-CHG-CNT,
+                 ST-QDX-ADJ-LOAD = LV-ADJ-CNT,
+                 ST-QDX-RCT-LOAD = LV-REC-CNT,
+                 ST-CHG-TO-CRS   = ST-CHG-TO-CRS + LV-OB-CHG-CTR,
+                 ST-CRIT-CHG     = LV-C-CHG-CNT, (* Printed critical errors *)
+                 ST-CRIT-DEM     = LV-C-DEM-CNT,
+                 ST-CRIT-INS     = LV-C-INS-CNT,
+                 ST-NON-CRIT-CHG = LV-NC-CHG-CNT,
+                 ST-NON-CRIT-DEM = LV-NC-DEM-CNT,
+                 ST-NON-CRIT-INS = LV-NC-INS-CNT,
+                 ST-INFO[1:1]    = "1";
+               END;
+             END;
+           END;
+           #INCLUDE-LOAD-ZO
+         END;
+    OTHERWISE: CONTINUE;
+    ENDCASE;
+    LV-FILE-CNT = LV-FILE-CNT + 1;
+       TAKE LOAD-FILE.LOAD-REC-ALL,
+            LV-LOAD-LOC NAME(L-LV-LOAD-LOC),
+            LV-AMT-LD NAME(L-LV-AMT-LD),
+            LV-CRIT-AMT-LD NAME(L-LV-CRIT-AMT-LD),
+            LV-NON-AMT-LD NAME(L-LV-NON-AMT-LD),
+            LV-AMT-RPT NAME(L-LV-AMT-RPT),
+            LV-DIAG-1 NAME(L-LV-DIAG-1),
+            LV-DIAG-2 NAME(L-LV-DIAG-2),
+            LV-DIAG-3 NAME(L-LV-DIAG-3),
+            LV-DIAG-4 NAME(L-LV-DIAG-4),
+            LOAD-FILE.LOAD-REC-TYPE,
+            LV-ACCT-NUM NAME(L-ACCT-NUM),
+            LV-DEMO-LOADED NAME(L-DEMO-LOADED),
+            LV-CHG-LOADED NAME(L-CHG-LOADED),
+            LV-ROSTER-FLAG NAME(L-LV-ROSTER-FLAG),
+            LV-SEND-CHG-CRS NAME(L-SEND-CHG-CRS),
+            LV-D-ERR-FLAG NAME(L-D-ERR),
+            LV-D-ERR-MSG NAME(L-D-MSG),
+            LV-C-ERR-FLAG NAME(L-C-ERR),
+            LV-C-ERR-MSG NAME(L-C-MSG),
+            LV-ERR-ROSTER NAME(L-LV-ERR-ROSTER),
+            LV-ERR-PAT-NAME NAME(L-LV-ERR-PAT-NAM);
+       END;
+    IF LV-FILE-CNT = 0 THEN BEGIN
+      TAKE "A" NAME(DUMMY-TAKE);
+    END;
+
+    (* WRITE RECORD OUT FOR LOADSTAT *)
+    CREATE FILE-132 WITH
+      (* DJH 04.11.05 - Use GV-AcctCd instead of $ACCOUNT *)
+      RECORD-132[1:4]   = $TRIM(GV-AcctCd),
+      RECORD-132[5:12]  = $DATES,
+      RECORD-132[13:18] = $TIMES,
+      RECORD-132[19:28] = $STR(LV-CHG-CNT,10),
+      RECORD-132[29:38] = $STR(LV-PAT-CNT,10),
+      RECORD-132[39:48] = $STR(0,10),
+      RECORD-132[49:58] = $STR(LV-FILE-CNT,10),
+      RECORD-132[59:68] = $STR(0,10),
+      RECORD-132[69:98] = LV-ACCT-NAME;
+    SORTED;
+    AT TOP OF PAGE DO ON PRINTER-FILE BEGIN 
+       PRINT "DATE PRINTED :" SKIP(0) NEED(2) 
+             LEFT(1),
+             $DATES LEFT(16) EDIT(MASK='MM/DD/YY',LENGTH=8),
+             "LOAD - LOADED REPORT             (" 
+             LEFT(49),
+             L-LV-LOAD-LOC LEFT(83) EDIT(LENGTH=19),
+             ")                PAGE:" LEFT(102),
+             $PAGE LEFT(125) EDIT(MASK='----9'),
+             GV-HeadingDt SKIP(1) LEFT(1) EDIT(LENGTH=23),
+             PARAMETER-M.PARM-CHAR-1<"CLIENT"> 
+             LEFT(49) EDIT(LENGTH=32),
+             $RJU(GV-AcctCd) LEFT(116) EDIT(LENGTH=8),
+             "ACCT" LEFT(126);
+       PRINT "" LEFT(132);
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+       IF LOAD-REC-TYPE = "H0" THEN BEGIN 
+    (* HEADER RECORD *)
+    (* EDM - META 14324 - Added LV-DEF-ASSISTANT *)
+          PRINT "File Label:" SKIP(5) NEED(4) 
+                LEFT(50),
+                $TRIM(LOAD-REC-ALL[3:10]) + " - " + LOAD-REC-ALL[13:42] 
+                LEFT(63) EDIT(LENGTH=43),
+                "File Date :" SKIP(3) LEFT(50),
+                $EDIT(LOAD-REC-ALL[47:50],"dd/dd/") + LOAD-REC-ALL[43:46] 
+                LEFT(63) EDIT(LENGTH=10);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* Account Record - Print Account Number *)
+    IF L-D-ERR = 0 AND L-DEMO-LOADED = 1 AND LV-CURR-ACCT <> L-ACCT-NUM THEN BEGIN
+      PRINT ("==============================================================" +
+             "==============================================================" +
+             "=====") SKIP(2) NEED(7) LEFT(1),
+             "" LEFT(132),
+             "Account:" SKIP(1) LEFT(1), $TRIM(LOAD-REC-ALL[3:14]) LEFT(10)
+              EDIT(LENGTH=12);
+      LV-CURR-ACCT = L-ACCT-NUM;
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* PATIENT RECORD *)
+    IF LOAD-REC-TYPE="P0" AND L-D-ERR = 0 AND L-DEMO-LOADED = 1 THEN BEGIN
+      (* GTW 6/30/09 #14705 - ADDED LV-SSN AND CALL TO MASK-SSN *)
+      LV-SSN = LOAD-REC-ALL[146:154];
+      LOGIC-MASK-SSN USING LV-SSN MODIFY;
+    #NOTE
+      PRINT ("==============================================================" +
+             "==============================================================" +
+             "=====") SKIP(2) NEED(7) LEFT(1),
+             "" LEFT(132),
+             "Account:" SKIP(1) LEFT(1), $TRIM(LOAD-REC-ALL[3:14]) LEFT(10)
+              EDIT(LENGTH=12),
+    #ENDNOTE
+      PRINT  "Patient:" SKIP(1) LEFT(10), $TRIM(LOAD-REC-ALL[15:34],RIGHT) + ", " +
+              LOAD-REC-ALL[35:46] LEFT(21) EDIT(LENGTH=34),
+             "Sex    :" LEFT(60), LOAD-REC-ALL[144:144] LEFT(69) EDIT(LENGTH=1),
+             "Medical#:" LEFT(90), LOAD-REC-ALL[164:175] LEFT(100) EDIT(LENGTH=12),
+              LOAD-REC-ALL[47:70] SKIP(1) LEFT(21) EDIT(LENGTH=24),
+             "DOB    :" LEFT(60), $EDIT(LOAD-REC-ALL[159:162],"dd/dd/") +
+              LOAD-REC-ALL[155:158] LEFT(69) EDIT(LENGTH=10),
+             "Roster#:" LEFT(90), LOAD-REC-ALL[182:197] LEFT(100) EDIT(LENGTH=16),
+              $TRIM(LOAD-REC-ALL[95:110],RIGHT) + ", " + LOAD-REC-ALL[111:112] +
+              " " + LOAD-REC-ALL[113:117] SKIP(1) LEFT(21) EDIT(LENGTH=26),
+             "Marital:" LEFT(60), LOAD-REC-ALL[145:145] LEFT(69) EDIT(LENGTH=1),
+             "Rel/Guar:" LEFT(90), LOAD-REC-ALL[163:163] LEFT(100) EDIT(LENGTH=1),
+             "Phone:" SKIP(1) LEFT(21),
+              $EDIT(LOAD-REC-ALL[124:133],"(ddd) ddd-dddd") LEFT(28)
+              EDIT(LENGTH=14),
+              (* GTW #14705 - PRINT LV-SSN WITH NEW MASK *)
+       "SSN    :" LEFT(60), $EDIT(LV-SSN,"xxx-xx-dddd") LEFT(69)
+              EDIT(LENGTH=11);
+      LV-PREV-ACCT = SPACES,
+      LV-PREV-ROST = SPACES;
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* GUARANTOR RECORD *)
+    IF LOAD-REC-TYPE="G0" AND L-D-ERR = 0 AND L-DEMO-LOADED = 1 THEN BEGIN
+      (* GTW #14705 *)
+      LV-SSN = LOAD-REC-ALL[146:154];
+      LOGIC-MASK-SSN USING LV-SSN MODIFY;
+      PRINT "Guarantor:" SKIP(2) NEED(4) LEFT(10),
+             $TRIM(LOAD-REC-ALL[15:34], RIGHT) + ", " + LOAD-REC-ALL[35:46] LEFT(21)
+             EDIT(LENGTH=34),
+            "Sex    :" LEFT(60), LOAD-REC-ALL[144:144] LEFT(69) EDIT(LENGTH=1),
+             LOAD-REC-ALL[47:70] SKIP(1) LEFT(21) EDIT(LENGTH=24),
+            "DOB    :" LEFT(60), $EDIT(LOAD-REC-ALL[159:162],"dd/dd/") +
+             LOAD-REC-ALL[155:158] LEFT(69) EDIT(LENGTH=10),
+             $TRIM(LOAD-REC-ALL[95:110],RIGHT) + ", " + LOAD-REC-ALL[111:112] +
+             " " + LOAD-REC-ALL[113:117] SKIP(1) LEFT(21) EDIT(LENGTH=26),
+            "Marital:" LEFT(60), LOAD-REC-ALL[145:145] LEFT(69) EDIT(LENGTH=1),
+            "Phone:" SKIP(1) LEFT(21), $EDIT(LOAD-REC-ALL[124:133],"(ddd) ddd-dddd")
+             LEFT(28) EDIT(LENGTH=14),
+                                      (* GTW #14705 *)
+            "SSN    :" LEFT(60), $EDIT(LV-SSN, "xxx-xx-dddd")
+             LEFT(69) EDIT(LENGTH=11);
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* INSURANCE RECORD *)
+    IF LOAD-REC-TYPE[1:1]="I" AND L-D-ERR = 0 AND L-DEMO-LOADED = 1 THEN BEGIN
+      PRINT "Insurance:" SKIP(2) NEED(4) LEFT(10), $TRIM(LOAD-REC-ALL[15:18]) +
+             " - " + LOAD-REC-ALL[19:42] LEFT(21) EDIT(LENGTH=31),
+            "SubName:" LEFT(60), $TRIM(LOAD-REC-ALL[120:139],RIGHT) + ", " +
+             LOAD-REC-ALL[140:151] LEFT(69) EDIT(LENGTH=34),
+             LOAD-REC-ALL[43:66] SKIP(1) LEFT(21) EDIT(LENGTH=24),
+            "Policy :" LEFT(60), LOAD-REC-ALL[154:177] LEFT(69) EDIT(LENGTH=24),
+             LOAD-REC-ALL[67:90] SKIP(1) LEFT(21) EDIT(LENGTH=24),
+            "Group  :" LEFT(60), LOAD-REC-ALL[178:193] LEFT(69) EDIT(LENGTH=16),
+             "-" LEFT(86), LOAD-REC-ALL[194:209] LEFT(88) EDIT(LENGTH=16),
+             $TRIM(LOAD-REC-ALL[91:106],RIGHT) + ", " + LOAD-REC-ALL[107:108] +
+             " " + LOAD-REC-ALL[109:113] SKIP(1) LEFT(21) EDIT(LENGTH=26),
+            "Effect :" LEFT(60), $EDIT(LOAD-REC-ALL[214:217],"dd/dd/") +
+             LOAD-REC-ALL[210:213] LEFT(69) EDIT(LENGTH=10), "-" LEFT(80),
+             $EDIT(LOAD-REC-ALL[222:225],"dd/dd/")+ LOAD-REC-ALL[218:221]
+             LEFT(83) EDIT(LENGTH=10);
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* EMPLOYER RECORD *)
+    IF LOAD-REC-TYPE[1:1]="E" AND L-D-ERR = 0 AND L-DEMO-LOADED = 1 THEN BEGIN
+      PRINT "Employer:" SKIP(2) NEED(2) LEFT(10), LOAD-REC-ALL[31:60] LEFT(21)
+             EDIT(LENGTH=30), LOAD-REC-ALL[15:30] SKIP(1) LEFT(21) EDIT(LENGTH=16);
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* Display Acct info when on Chg info Prints - Non-Roster Only *)
+    IF LOAD-REC-TYPE = "C0" AND L-C-ERR = 0 AND
+       L-DEMO-LOADED = 0 AND L-CHG-LOADED = 1 THEN BEGIN
+      IF LV-PREV-ACCT <> LV-ACCT-NUM THEN BEGIN
+        PRINT ("=============================================================" +
+               "=============================================================" +
+               "========") SKIP(2) NEED(3) LEFT(1),
+               "Account:" SKIP(1) NEED(3) LEFT(1),
+               $TRIM(LOAD-REC-ALL[3:14]) LEFT(10) EDIT(LENGTH=12), "-" LEFT(23),
+               L-LV-ERR-PAT-NAM LEFT(25) EDIT(LENGTH=34),
+               "Roster#:" LEFT(82), L-LV-ERR-ROSTER LEFT(92) EDIT(LENGTH=12);
+        LV-PREV-ACCT = LV-ACCT-NUM;
+        LV-PREV-ROST = L-LV-ERR-ROSTER;
+      END;
+      ELSE BEGIN
+        IF LV-PREV-ROST <> L-LV-ERR-ROSTER THEN BEGIN
+          PRINT ("=============================================================" +
+                 "=============================================================" +
+                 "========") SKIP(2) NEED(3) LEFT(1),
+                 "Account:" SKIP(1) NEED(3) LEFT(1),
+                 $TRIM(LOAD-REC-ALL[3:14]) LEFT(10) EDIT(LENGTH=12), "-" LEFT(23),
+                 L-LV-ERR-PAT-NAM LEFT(25) EDIT(LENGTH=34),
+                 "Roster#:" LEFT(82), L-LV-ERR-ROSTER LEFT(92) EDIT(LENGTH=12);
+          LV-PREV-ACCT = LV-ACCT-NUM;
+          LV-PREV-ROST = L-LV-ERR-ROSTER;
+        END;
+      END;
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* CHARGE RECORD *)
+    IF LOAD-REC-TYPE = "C0" AND L-C-ERR = 0 AND L-SEND-CHG-CRS = 0 THEN BEGIN
+      PRINT "Charge:    Phys   :" SKIP(2) NEED(4) LEFT(10),
+             LOAD-REC-ALL[65:72] LEFT(30) EDIT(LENGTH=8),
+            "Div  :" LEFT(40), LOAD-REC-ALL[97:100] LEFT(47) EDIT(LENGTH=4),
+            "DOS :" LEFT(57), $EDIT(LOAD-REC-ALL[19:22],"dd/dd/") +
+             LOAD-REC-ALL[15:18] LEFT(63) EDIT(LENGTH=10),
+            "Admit:" LEFT(75), $EDIT(LOAD-REC-ALL[124:127],"dd/dd/") +
+             LOAD-REC-ALL[120:123] LEFT(82) EDIT(LENGTH=10),
+            "-" LEFT(93), $EDIT(LOAD-REC-ALL[138:141],"dd/dd/") +
+             LOAD-REC-ALL[134:137] LEFT(95) EDIT(LENGTH=10),
+            "Cond    :" LEFT(111), LOAD-REC-ALL[111:111] LEFT(121) EDIT(LENGTH=1),
+           "Loc    :" SKIP(1) LEFT(21), LOAD-REC-ALL[73:76] LEFT(30) EDIT(LENGTH=4),
+            "Dept :" LEFT(40), LOAD-REC-ALL[101:104] LEFT(47) EDIT(LENGTH=4),
+            "Proc:" LEFT(57), LOAD-REC-ALL[23:32] LEFT(63) EDIT(LENGTH=10),
+            "Auth#:" LEFT(75), LOAD-REC-ALL[244:261] LEFT(82) EDIT(LENGTH=18),
+            "Onset Dt:" LEFT(111), $EDIT(LOAD-REC-ALL[116:119],"dd/dd/") +
+             LOAD-REC-ALL[112:115] LEFT(121) EDIT(LENGTH=10),
+          "Assist :" SKIP(1) LEFT(21), LOAD-REC-ALL[77:84] LEFT(30) EDIT(LENGTH=8),
+            "Inst :" LEFT(40), LOAD-REC-ALL[105:108] LEFT(47) EDIT(LENGTH=4),
+            "Unit:" LEFT(57), $NUM(LOAD-REC-ALL[61:64]) / 10
+             LEFT(63) EDIT(MASK='--9.9'),
+            "Accn#:" LEFT(75), LOAD-REC-ALL[320:339] LEFT(82) EDIT(LENGTH=20),
+            "Enctr   :" LEFT(111), LOAD-REC-ALL[273:284] LEFT(121) EDIT(LENGTH=12),
+            "Special:" SKIP(1) LEFT(21), LOAD-REC-ALL[93:96] LEFT(30)
+             EDIT(LENGTH=4),
+            "Refer:" LEFT(40), LOAD-REC-ALL[85:92] LEFT(47) EDIT(LENGTH=8),
+            "Amt :" LEFT(57), $NUM(L-LV-AMT-RPT) / 100
+             LEFT(63) EDIT(MASK='-----9.99'),
+            "Diag :" LEFT(75),
+             L-LV-DIAG-1 LEFT(82) EDIT(LENGTH=6),
+             L-LV-DIAG-2 LEFT(89) EDIT(LENGTH=6),
+             L-LV-DIAG-3 LEFT(96) EDIT(LENGTH=6),
+             L-LV-DIAG-4 LEFT(103) EDIT(LENGTH=6),
+             "Mod     :" LEFT(111), $EDIT(LOAD-REC-ALL[236:239], "xx/xx")
+             LEFT(121) EDIT(LENGTH=5),
+             "Misc Dt:" SKIP(1) LEFT(21), $EDIT(LOAD-REC-ALL[365:368],"dd/dd/") +
+             LOAD-REC-ALL[361:364] LEFT(30) EDIT(LENGTH=10);
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* RECEIPT RECORD *)
+    IF LOAD-REC-TYPE = "R0" AND L-C-ERR = 0 THEN BEGIN
+      PRINT "Receipt:   Source:" SKIP(2) LEFT(10), LOAD-REC-ALL[23:26] LEFT(29)
+             EDIT(LENGTH=4),
+            "DOS:" LEFT(35), $EDIT(LOAD-REC-ALL[19:22],"dd/dd/") +
+             LOAD-REC-ALL[15:18] LEFT(40) EDIT(LENGTH=10),
+            "Amt:" LEFT(52), $NUM(LOAD-REC-ALL[51:58]) / 100
+             LEFT(57) EDIT(MASK='-----9.99'),
+            "Check Dt:" LEFT(68), $EDIT(LOAD-REC-ALL[75:78],"dd/dd/") +
+              LOAD-REC-ALL[71:74] LEFT(78) EDIT(LENGTH=10),
+            "Check#:" LEFT(90), LOAD-REC-ALL[59:70] LEFT(98) EDIT(LENGTH=12);
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE BEGIN 
+    (* ADJUSTMENT RECORD *)
+    IF LOAD-REC-TYPE = "A0" AND L-C-ERR = 0 THEN BEGIN
+      PRINT "Adjust:    Code:" SKIP(2) LEFT(10), LOAD-REC-ALL[23:26] LEFT(27)
+             EDIT(LENGTH=4),
+            "Proc:" LEFT(33), LOAD-REC-ALL[67:76] LEFT(39) EDIT(LENGTH=10),
+            "DOS:" LEFT(51), $EDIT(LOAD-REC-ALL[19:22],"dd/dd/") +
+              LOAD-REC-ALL[15:18] LEFT(56) EDIT(LENGTH=10),
+            "Cred/Amt:" LEFT(68), $NUM(LOAD-REC-ALL[59:66]) / 100
+             LEFT(78) EDIT(MASK='-----9.99'),
+            "Deb/Amt:" LEFT(89), $NUM(LOAD-REC-ALL[51:58]) / 100
+             LEFT(98) EDIT(MASK='-----9.99');
+    END;
+       END;
+    AT FINAL DO ON PRINTER-FILE BEGIN 
+       NEW;
+    IF LV-FILE-CNT = 0 THEN BEGIN
+      PRINT "*** LOADFILE NOT PROCESSED, MAYBE INVALID CLIENT CODE IN HEADER ***";
+    END;
+       PRINT "Load Totals Summary....." SKIP(2) 
+             NEED(25) LEFT(21),
+             "Patients Loaded      :" SKIP(1) 
+             LEFT(25),
+             LV-PAT-CNT LEFT(48) EDIT(MASK='-----9'),
+             "Insurances Loaded    :" SKIP(1) 
+             LEFT(25),
+             LV-INS-CNT LEFT(48) EDIT(MASK='-----9'),
+             "Charges Loaded to" SKIP(1) LEFT(25),
+             "Harp               :" SKIP(1) LEFT(27),
+             LV-CHG-CNT LEFT(48) EDIT(MASK='-----9'),
+             "Charge Repository  :" SKIP(1) LEFT(27),
+             LV-OB-CHG-CTR LEFT(48) EDIT(MASK='-----9'),
+             "Receipts Loaded      :" SKIP(1) 
+             LEFT(25),
+             LV-REC-CNT LEFT(48) EDIT(MASK='-----9'),
+             "Adjustments Loaded   :" SKIP(1) 
+             LEFT(25),
+             LV-ADJ-CNT LEFT(48) EDIT(MASK='-----9'),
+             "Error Totals Summary....." SKIP(2) 
+             LEFT(21),
+             "Demographic Errors....." SKIP(1) 
+             LEFT(25),
+             "Non-critical Errors   :" SKIP(1) 
+             LEFT(29),
+             LV-NC-DEMO-CNT LEFT(53) EDIT(MASK='-----9'),
+             "Critical Errors       :" SKIP(1) 
+             LEFT(29),
+             LV-C-DEMO-CNT LEFT(53) EDIT(MASK='-----9'),
+             "Insurance Errors....." SKIP(2) 
+             LEFT(25),
+             "Non-critical Errors   :" SKIP(1) 
+             LEFT(29),
+             LV-NC-INS-CNT LEFT(53) EDIT(MASK='-----9'),
+             "Critical Errors       :" SKIP(1) 
+             LEFT(29),
+             LV-C-INS-CNT LEFT(53) EDIT(MASK='-----9'),
+             "Charge Errors....." SKIP(2) LEFT(25),
+             "Non-critical Errors   :" SKIP(1) 
+             LEFT(29),
+             LV-NC-TRAN-CNT LEFT(53) EDIT(MASK='-----9'),
+             "Critical Errors       :" SKIP(1) 
+             LEFT(29),
+             LV-C-TRAN-CNT LEFT(53) EDIT(MASK='-----9'),
+             "Bypassing Error Report ...." SKIP(2) 
+             LEFT(25),
+             "Non-critical Demographic Errors :" 
+             SKIP(1) LEFT(29),
+             LV-NO-PRT-D-CNT LEFT(63) EDIT(MASK='-----9'),
+             "Non-critical Charge Errors      :" 
+             SKIP(1) LEFT(29),
+             LV-NO-PRT-C-CNT LEFT(63) EDIT(MASK='-----9');
+       END;
+    AT FINAL DO ON PRINTER-FILE BEGIN 
+       IF CL-USE-CHG-AMT = "Y" THEN BEGIN 
+          PRINT "Dollar Amount Loaded :" SKIP(0) 
+                LEFT(25),
+                L-LV-AMT-LD LEFT(48) EDIT(MASK='-------9.99');
+          END;
+       END;
+    AT FINAL DO ON PRINTER-FILE BEGIN 
+       IF CL-USE-CHG-AMT <> "Y" THEN BEGIN 
+          PRINT ("NOTE: Dollar amounts are not figured in this process, refer to" +
+                 " the Charge Batch Control for this.") 
+                SKIP(2) LEFT(25);
+          END;
+       END;
+    AT FIRST DO BEGIN 
+    LV-C-INS-CNT = 0, LV-C-DEMO-CNT = 0, LV-C-TRAN-CNT = 0;
+       END;
+    AT TOP OF PAGE DO ON PRINTER-FILE2 BEGIN 
+       PRINT "PRINTED DATE :" SKIP(0) NEED(2) 
+             LEFT(1),
+             $DATES LEFT(16) EDIT(MASK='MM/DD/YY',LENGTH=8),
+             "LOAD - CRITICAL ERROR REPORT     (" 
+             LEFT(49),
+             L-LV-LOAD-LOC LEFT(83) EDIT(LENGTH=19),
+             ")                PAGE:" LEFT(102),
+             $PAGE LEFT(125) EDIT(MASK='----9'),
+             GV-HeadingDt SKIP(1) LEFT(1) EDIT(LENGTH=23),
+             PARAMETER-M.PARM-CHAR-1<"CLIENT"> 
+             LEFT(49) EDIT(LENGTH=32),
+             $RJU(GV-AcctCd) LEFT(116) EDIT(LENGTH=8),
+             "ACCT" LEFT(126);
+       PRINT "" LEFT(132);
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+    (* CRITICAL ERROR INITIALIZATION RECORD *)
+    LV-ACCT-NUM = $RJU(LOAD-REC-ALL[3:14]);
+    IF LV-ACCT-NUM <> LV-P-ACCT-NUM AND $POS("H0,Z0",LOAD-REC-TYPE) = 0 THEN BEGIN
+      LV-ERR-PAGE = 0;
+      LV-N-ERR-PAGE = 0;
+      LV-P-ACCT-NUM = LV-ACCT-NUM;
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE = "H0" THEN BEGIN 
+    (* CRITICAL ERROR HEADER RECORD *)
+          PRINT "File Label:" SKIP(5) NEED(4) 
+                LEFT(50),
+                $TRIM(LOAD-REC-ALL[3:12]) + " - " + LOAD-REC-ALL[13:42] 
+                LEFT(62) EDIT(LENGTH=43),
+                "File Date:" SKIP(3) LEFT(50),
+                $EDIT(LOAD-REC-ALL[47:50],"dd/dd/") + LOAD-REC-ALL[43:46] 
+                LEFT(62) EDIT(LENGTH=10);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+    (* CHG-CRITICAL DEMO SUMMARY RECORD - Accnt Info Line *)
+    IF LV-ERR-PAGE=0 AND (L-D-ERR>1 OR L-C-ERR>1) AND
+       L-D-ERR <> 4 AND L-C-ERR <> 4 THEN BEGIN
+      LV-ERR-PAGE = 1;
+      PRINT ("==============================================================" +
+             "==============================================================" +
+             "=====") SKIP(2) NEED(10) LEFT(1),
+             "Account:" SKIP(1) LEFT(1), $TRIM(LV-ACCT-NUM) LEFT(10)
+              EDIT(LENGTH=12), "-" LEFT(23), L-LV-ERR-PAT-NAM LEFT(25)
+              EDIT(LENGTH=34), "Roster#:" LEFT(82), L-LV-ERR-ROSTER LEFT(92)
+              EDIT(LENGTH=12);
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE = "P0" AND L-D-ERR > 1 AND L-D-ERR <> 4 THEN BEGIN 
+    (* DEMO-CRITICAL PATIENT RECORD & MSG *)
+    (* GTW 7/10/09 #14705 - DISPLAY LV-SSN AFTER IT GOES THROUGH MASK-SSN *)
+    LV-SSN = LOAD-REC-ALL[146:148] + "-" + LOAD-REC-ALL[149:150] + "-" +
+             LOAD-REC-ALL[151:154];
+    LOGIC-MASK-SSN USING LV-SSN MODIFY;
+    LV-C-DEMO-CNT = LV-C-DEMO-CNT + 1;
+          PRINT "Patient:" SKIP(2) NEED(6) LEFT(10),
+                $TRIM(LOAD-REC-ALL[15:34],RIGHT) + ", " +LOAD-REC-ALL[35:46] 
+                LEFT(21) EDIT(LENGTH=34),
+                "Sex     :" LEFT(60),
+                LOAD-REC-ALL[144:144] LEFT(70) 
+                EDIT(LENGTH=1),
+                "Medical#:" LEFT(82),
+                LOAD-REC-ALL[164:175] LEFT(92) 
+                EDIT(LENGTH=12),
+                LOAD-REC-ALL[47:70] SKIP(1) LEFT(21) 
+                EDIT(LENGTH=24),
+                "DOB     :" LEFT(60),
+                $EDIT(LOAD-REC-ALL[159:162],"dd/dd/") +LOAD-REC-ALL[155:158] 
+                LEFT(70) EDIT(LENGTH=10),
+                "Roster# :" LEFT(82),
+                LOAD-REC-ALL[182:197] LEFT(92) 
+                EDIT(LENGTH=16),
+                $TRIM(LOAD-REC-ALL[95:110],RIGHT) + ", " + 
+                LOAD-REC-ALL[111:112] + LOAD-REC-ALL[113:117] 
+                SKIP(1) LEFT(21) EDIT(LENGTH=26),
+                "Maritial:" LEFT(60),
+                LOAD-REC-ALL[145:145] LEFT(70) 
+                EDIT(LENGTH=1),
+                "Rel/Guar:" LEFT(82),
+                LOAD-REC-ALL[163:163] LEFT(92) 
+                EDIT(LENGTH=1),
+                "Phone:" SKIP(1) LEFT(21),
+                $EDIT(LOAD-REC-ALL[124:133],"(ddd) ddd-dddd") 
+                LEFT(28) EDIT(LENGTH=14),
+                "SSN     :" LEFT(60),
+                LV-SSN LEFT(70) EDIT(LENGTH=11),
+                "Err:" SKIP(2) LEFT(21),
+                L-D-MSG LEFT(26) EDIT(LENGTH=60),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE = "G0" AND L-D-ERR > 1 AND L-D-ERR <> 4 THEN BEGIN 
+    (* DEMO-CRITICAL GUARANTOR RECORD *)
+    (* GTW 7/10/09 #14705 - DISPLAY LV-SSN AFTER IT GOES THROUGH MASK-SSN *)
+    LV-SSN = LOAD-REC-ALL[146:148] + "-" + LOAD-REC-ALL[149:150] + "-" +
+             LOAD-REC-ALL[151:154];
+    LOGIC-MASK-SSN USING LV-SSN MODIFY;
+    (*LV-C-DEMO-CNT = LV-C-DEMO-CNT + 1; *)
+          PRINT "Guarantor:" SKIP(2) NEED(4) 
+                LEFT(10),
+                $TRIM(LOAD-REC-ALL[15:34],RIGHT) + ", " + 
+                LOAD-REC-ALL[35:46] LEFT(21) 
+                EDIT(LENGTH=34),
+                "Sex     :" LEFT(60),
+                LOAD-REC-ALL[144:144] LEFT(70) 
+                EDIT(LENGTH=1),
+                LOAD-REC-ALL[47:70] SKIP(1) LEFT(21) 
+                EDIT(LENGTH=24),
+                "DOB     :" LEFT(60),
+                $EDIT(LOAD-REC-ALL[159:162],"dd/dd/")+ LOAD-REC-ALL[155:158] 
+                LEFT(70) EDIT(LENGTH=10),
+                $TRIM(LOAD-REC-ALL[95:110],RIGHT) + ", " + 
+                LOAD-REC-ALL[111:112] + " " + LOAD-REC-ALL[113:117] 
+                SKIP(1) LEFT(21) EDIT(LENGTH=26),
+                "Marital :" LEFT(60),
+                LOAD-REC-ALL[145:145] LEFT(70) 
+                EDIT(LENGTH=1),
+                "Phone:" SKIP(1) LEFT(21),
+                $EDIT(LOAD-REC-ALL[124:133],"(ddd) ddd-dddd") 
+                LEFT(28) EDIT(LENGTH=14),
+                "SSN     :" LEFT(60),
+                LV-SSN LEFT(70) EDIT(LENGTH=9);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE="G0" AND L-D-ERR=3 THEN BEGIN 
+    (* DEMO-CRITICAL GUARANTOR MSG *)
+          PRINT "Err:" SKIP(2) LEFT(21),
+                L-D-MSG LEFT(26) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE[1:1] = "I" AND L-D-ERR > 1 AND L-D-ERR <> 4 THEN BEGIN 
+    (* DEMO-CRITICAL INSURANCE RECORD *)
+    LV-C-INS-CNT = LV-C-INS-CNT + 1;
+          PRINT "Insurance:" SKIP(2) NEED(4) 
+                LEFT(10),
+                $TRIM(LOAD-REC-ALL[15:18]) + " - " + LOAD-REC-ALL[19:42] 
+                LEFT(21) EDIT(LENGTH=31),
+                "SubName :" LEFT(60),
+                $TRIM(LOAD-REC-ALL[120:139],RIGHT) + ", " + 
+                LOAD-REC-ALL[140:151] LEFT(70) 
+                EDIT(LENGTH=34),
+                LOAD-REC-ALL[43:66] SKIP(1) LEFT(21) 
+                EDIT(LENGTH=24),
+                "Policy  :" LEFT(60),
+                LOAD-REC-ALL[154:177] LEFT(70) 
+                EDIT(LENGTH=24),
+                LOAD-REC-ALL[67:90] SKIP(1) LEFT(21) 
+                EDIT(LENGTH=24),
+                "Group   :" LEFT(60),
+                LOAD-REC-ALL[178:193] LEFT(70) 
+                EDIT(LENGTH=16),
+                "-" LEFT(87),
+                LOAD-REC-ALL[194:209] LEFT(89) 
+                EDIT(LENGTH=16),
+                $TRIM(LOAD-REC-ALL[91:106],RIGHT) + ", " + 
+                LOAD-REC-ALL[107:108] + " " + LOAD-REC-ALL[109:113] 
+                SKIP(1) LEFT(21) EDIT(LENGTH=26),
+                "Effect  :" LEFT(60),
+                $EDIT(LOAD-REC-ALL[214:217],"dd/dd/") +LOAD-REC-ALL[210:213] 
+                LEFT(70) EDIT(LENGTH=10),
+                "-" LEFT(81),
+                $EDIT(LOAD-REC-ALL[222:225],"dd/dd/") +LOAD-REC-ALL[218:221] 
+                LEFT(83) EDIT(LENGTH=10);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE[1:1]="I" AND L-D-ERR=3 THEN BEGIN 
+    (* DEMO-CRITICAL INSURANCE MSG *)
+          PRINT "Err:" SKIP(2) LEFT(21),
+                L-D-MSG LEFT(26) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE[1:1] = "E" AND L-D-ERR > 1 AND L-D-ERR <> 4 THEN BEGIN 
+    (* DEMO-CRITICAL EMPLOYEE RECORD *)
+    (*LV-C-DEMO-CNT = LV-C-DEMO-CNT + 1; *)
+          PRINT "Employer:" SKIP(2) NEED(2) LEFT(10),
+                LOAD-REC-ALL[31:60] LEFT(21) 
+                EDIT(LENGTH=30),
+                LOAD-REC-ALL[15:30] SKIP(1) LEFT(21) 
+                EDIT(LENGTH=16);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE[1:1]="E" AND L-D-ERR=3 THEN BEGIN 
+    (* DEMO-CRITICAL EMPLOYEE MSG *)
+          PRINT "Err:" SKIP(2) LEFT(21),
+                L-D-MSG LEFT(26) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE="C0" AND L-C-ERR > 1 AND L-C-ERR <> 4 THEN BEGIN 
+    (* CHG/DEMO CRITICAL CHARGE RECORD *)
+    LV-C-TRAN-CNT = LV-C-TRAN-CNT + 1;
+          PRINT "Charge:    Phys   :" SKIP(2) 
+                NEED(6) LEFT(10),
+                LOAD-REC-ALL[65:72] LEFT(30) 
+                EDIT(LENGTH=8),
+                "Div  :" LEFT(40),
+                LOAD-REC-ALL[97:100] LEFT(47) 
+                EDIT(LENGTH=4),
+                "DOS :" LEFT(57),
+                $EDIT(LOAD-REC-ALL[19:22],"dd/dd/") + LOAD-REC-ALL[15:18] 
+                LEFT(63) EDIT(LENGTH=10),
+                "Admit:" LEFT(75),
+                $EDIT(LOAD-REC-ALL[124:127],"dd/dd/")+LOAD-REC-ALL[120:123] 
+                LEFT(82) EDIT(LENGTH=10),
+                "-" LEFT(93),
+                $EDIT(LOAD-REC-ALL[138:141],"dd/dd/")+LOAD-REC-ALL[134:137] 
+                LEFT(95) EDIT(LENGTH=10),
+                "Cond    :" LEFT(111),
+                LOAD-REC-ALL[111:111] LEFT(121) 
+                EDIT(LENGTH=1),
+                "Loc    :" SKIP(1) LEFT(21),
+                LOAD-REC-ALL[73:76] LEFT(30) 
+                EDIT(LENGTH=4),
+                "Dept :" LEFT(40),
+                LOAD-REC-ALL[101:104] LEFT(47) 
+                EDIT(LENGTH=4),
+                "Proc:" LEFT(57),
+                LOAD-REC-ALL[23:32] LEFT(63) 
+                EDIT(LENGTH=10),
+                "Auth#:" LEFT(75),
+                LOAD-REC-ALL[244:261] LEFT(82) 
+                EDIT(LENGTH=18),
+                "Onset Dt:" LEFT(111),
+                $EDIT(LOAD-REC-ALL[116:119],"dd/dd/")+LOAD-REC-ALL[112:115] 
+                LEFT(121) EDIT(LENGTH=10),
+                "Assist :" SKIP(1) LEFT(21),
+                LOAD-REC-ALL[77:84] LEFT(30) 
+                EDIT(LENGTH=8),
+                "Inst :" LEFT(40),
+                LOAD-REC-ALL[105:108] LEFT(47) 
+                EDIT(LENGTH=4),
+                "Unit:" LEFT(57),
+                $NUM(LOAD-REC-ALL[61:64]) / 10 
+                LEFT(63) EDIT(MASK='--9.9'),
+                "Accn#:" LEFT(75),
+                LOAD-REC-ALL[320:339] LEFT(82) 
+                EDIT(LENGTH=20),
+                "Enctr   :" LEFT(111),
+                LOAD-REC-ALL[273:284] LEFT(121) 
+                EDIT(LENGTH=12),
+                "Special:" SKIP(1) LEFT(21),
+                LOAD-REC-ALL[93:96] LEFT(30) 
+                EDIT(LENGTH=4),
+                "Refer:" LEFT(40),
+                LOAD-REC-ALL[85:92] LEFT(47) 
+                EDIT(LENGTH=8),
+                "Amt :" LEFT(57),
+                $NUM(LOAD-REC-ALL[53:60]) / 100 
+                LEFT(63) EDIT(MASK='-----9.99'),
+                "Diag :" LEFT(75),
+                LOAD-REC-ALL[148:153] LEFT(82) 
+                EDIT(LENGTH=6),
+                LOAD-REC-ALL[170:175] LEFT(89) 
+                EDIT(LENGTH=6),
+                LOAD-REC-ALL[192:197] LEFT(96) 
+                EDIT(LENGTH=6),
+                LOAD-REC-ALL[214:219] LEFT(103) 
+                EDIT(LENGTH=6),
+                "Mod     :" LEFT(111),
+                $EDIT(LOAD-REC-ALL[236:239],"xx/xx") 
+                LEFT(121) EDIT(LENGTH=5),
+                "Misc Dt:" SKIP(1) LEFT(21),
+                $EDIT(LOAD-REC-ALL[365:368],"dd/dd/") + 
+                LOAD-REC-ALL[361:364] LEFT(30) 
+                EDIT(LENGTH=10);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE="C0" AND L-C-ERR=2 THEN BEGIN 
+    (* CHG CRITICAL ERROR RECORD *)
+          PRINT "Err:" SKIP(2) LEFT(21),
+                L-C-MSG LEFT(26) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE="R0" AND L-C-ERR > 1 THEN BEGIN 
+    (* REC/DEMO CRITICAL RECEIPT RECORD *)
+    LV-C-TRAN-CNT = LV-C-TRAN-CNT + 1;
+          PRINT "Receipt:   Source:" SKIP(2) 
+                LEFT(10),
+                LOAD-REC-ALL[23:26] LEFT(29) 
+                EDIT(LENGTH=4),
+                "DOS:" LEFT(35),
+                $EDIT(LOAD-REC-ALL[19:22],"dd/dd/") + LOAD-REC-ALL[15:18] 
+                LEFT(40) EDIT(LENGTH=10),
+                "Amt:" LEFT(52),
+                $NUM(LOAD-REC-ALL[51:58]) / 100 
+                LEFT(57) EDIT(MASK='-----9.99'),
+                "Check Dt:" LEFT(68),
+                $EDIT(LOAD-REC-ALL[75:78],"dd/dd/") + LOAD-REC-ALL[71:74] 
+                LEFT(78) EDIT(LENGTH=10),
+                "Check#:" LEFT(90),
+                LOAD-REC-ALL[59:70] LEFT(98) 
+                EDIT(LENGTH=12);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE = "R0" AND L-C-ERR = 2 THEN BEGIN 
+    (* REC CRITICAL ERROR RECORD *)
+          PRINT "Err:" SKIP(2) LEFT(21),
+                L-C-MSG LEFT(26) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE = "A0" AND L-C-ERR > 1 THEN BEGIN 
+    (* ADJ/DEMO CRITICAL ADJUSTMENT RECORD *)
+    LV-C-TRAN-CNT = LV-C-TRAN-CNT + 1;
+          PRINT "Adjust:    Code:" SKIP(2) LEFT(10),
+                LOAD-REC-ALL[23:26] LEFT(27) 
+                EDIT(LENGTH=4),
+                "Proc:" LEFT(33),
+                LOAD-REC-ALL[67:76] LEFT(39) 
+                EDIT(LENGTH=10),
+                "DOS:" LEFT(51),
+                $EDIT(LOAD-REC-ALL[19:22],"dd/dd/") + LOAD-REC-ALL[15:18] 
+                LEFT(56) EDIT(LENGTH=10),
+                "Cred/Amt:" LEFT(68),
+                $NUM(LOAD-REC-ALL[59:66]) / 100 
+                LEFT(78) EDIT(MASK='-----9.99'),
+                "Deb/Amt:" LEFT(89),
+                $NUM(LOAD-REC-ALL[51:58]) / 100 
+                LEFT(98) EDIT(MASK='-----9.99');
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE2 BEGIN 
+       IF LOAD-REC-TYPE = "A0" AND L-C-ERR = 2 THEN BEGIN 
+    (* ADJ CRITICAL ERROR RECORD *)
+          PRINT "Err:" SKIP(2) LEFT(21),
+                L-C-MSG LEFT(26) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT FINAL DO ON PRINTER-FILE2 BEGIN 
+    IF LV-FILE-CNT = 0 THEN BEGIN
+      PRINT "*** LOADFILE NOT PROCESSED, MAYBE INVALID CLIENT CODE IN HEADER ***";
+    END;
+       PRINT "Critical Error Summary..." SKIP(2) 
+             NEED(4) LEFT(21),
+             "Demographic Count :" SKIP(1) LEFT(25),
+             LV-C-DEMO-CNT LEFT(45) EDIT(MASK='-----9'),
+             "Insurance Count   :" SKIP(1) LEFT(25),
+             LV-C-INS-CNT LEFT(45) EDIT(MASK='-----9'),
+             "Transaction Count :" SKIP(1) LEFT(25),
+             LV-C-TRAN-CNT LEFT(45) EDIT(MASK='-----9');
+       END;
+    AT FINAL DO ON PRINTER-FILE2 BEGIN 
+       IF CL-USE-CHG-AMT = "Y" THEN BEGIN 
+          PRINT "Dollar Amount     : $" SKIP(0) 
+                LEFT(25),
+                L-LV-CRIT-AMT-LD LEFT(46) EDIT(MASK='-------9.99');
+          END;
+       END;
+    AT FIRST DO BEGIN 
+    (* INIT VARS *)
+    LV-NC-INS-CNT = 0, LV-NC-DEMO-CNT = 0, LV-NC-TRAN-CNT = 0;
+       END;
+    AT TOP OF PAGE DO ON PRINTER-FILE3 BEGIN 
+       PRINT "PRINTED DATE :" SKIP(0) NEED(2) 
+             LEFT(1),
+             $DATES LEFT(16) EDIT(MASK='MM/DD/YY',LENGTH=8),
+             "LOAD - NON-CRITICAL ERROR REPORT (" 
+             LEFT(49),
+             L-LV-LOAD-LOC LEFT(83) EDIT(LENGTH=19),
+             ")                PAGE:" LEFT(102),
+             $PAGE LEFT(125) EDIT(MASK='----9'),
+             GV-HeadingDt SKIP(1) LEFT(1) EDIT(LENGTH=23),
+             PARAMETER-M.PARM-CHAR-1<"CLIENT"> 
+             LEFT(49) EDIT(LENGTH=32),
+             $RJU(GV-AcctCd) LEFT(116) EDIT(LENGTH=8),
+             "ACCT" LEFT(126);
+       PRINT "" LEFT(132);
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+    (* ERROR INITIALIZATION RECORD *)
+    LV-ACCT-NUM = $RJU(LOAD-REC-ALL[3:14]);
+    IF LV-ACCT-NUM <> LV-P-ACCT-NUM AND $POS("H0,Z0",LOAD-REC-TYPE) = 0 THEN BEGIN
+      LV-ERR-PAGE = 0;
+      LV-N-ERR-PAGE = 0;
+      LV-P-ACCT-NUM = LV-ACCT-NUM;
+    END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE = "H0" THEN BEGIN 
+    (* HEADER RECORD *)
+          PRINT "File Label:" SKIP(5) NEED(4) 
+                LEFT(50),
+                $TRIM(LOAD-REC-ALL[3:12]) + " - " + LOAD-REC-ALL[13:42] 
+                LEFT(62) EDIT(LENGTH=43),
+                "File Date:" SKIP(3) LEFT(50),
+                $EDIT(LOAD-REC-ALL[47:50],"dd/dd/") + LOAD-REC-ALL[43:46] 
+                LEFT(62) EDIT(LENGTH=10);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LV-N-ERR-PAGE=0 AND (L-D-ERR=1 OR L-C-ERR=1) THEN BEGIN 
+    (* ERROR NEW PAGE RECORD *)
+    LV-N-ERR-PAGE = 1;
+          PRINT ("==============================================================" +
+                 "==============================================================" +
+                 "=====") SKIP(2) NEED(10) LEFT(1),
+                "Account:" SKIP(1) LEFT(1),
+                LV-ACCT-NUM LEFT(10) EDIT(LENGTH=12),
+                "-" LEFT(23),
+                L-LV-ERR-PAT-NAM LEFT(25) EDIT(LENGTH=34),
+                "Roster#:" LEFT(82),
+                L-LV-ERR-ROSTER LEFT(92) EDIT(LENGTH=12);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE = "P0" AND L-D-ERR = 1 THEN BEGIN 
+    (* DEMO-NON CRITICAL PATIENT RECORD *)
+    (* GTW 7/10/09 #14705 - DISPLAY LV-SSN AFTER IT GOES THROUGH MASK-SSN *)
+    LV-SSN = LOAD-REC-ALL[146:148] + "-" + LOAD-REC-ALL[149:150] + "-" +
+             LOAD-REC-ALL[151:154];
+    LOGIC-MASK-SSN USING LV-SSN MODIFY;
+    LV-NC-DEMO-CNT = LV-NC-DEMO-CNT + 1;
+          PRINT "Patient:" SKIP(2) NEED(6) LEFT(10),
+                $TRIM(LOAD-REC-ALL[15:34],RIGHT)+", "+LOAD-REC-ALL[35:46] 
+                LEFT(22) EDIT(LENGTH=34),
+                "Sex     :" LEFT(60),
+                LOAD-REC-ALL[144:144] LEFT(70) 
+                EDIT(LENGTH=1),
+                "Medical#:" LEFT(82),
+                LOAD-REC-ALL[164:175] LEFT(92) 
+                EDIT(LENGTH=12),
+                LOAD-REC-ALL[47:70] SKIP(1) LEFT(22) 
+                EDIT(LENGTH=24),
+                "DOB     :" LEFT(60),
+                $EDIT(LOAD-REC-ALL[159:162],"dd/dd/")+ LOAD-REC-ALL[155:158] 
+                LEFT(70) EDIT(LENGTH=10),
+                "Roster# :" LEFT(82),
+                LOAD-REC-ALL[182:197] LEFT(92) 
+                EDIT(LENGTH=16),
+                $TRIM(LOAD-REC-ALL[95:110],RIGHT)+", "+ 
+                LOAD-REC-ALL[111:112]+" "+LOAD-REC-ALL[113:117] 
+                SKIP(1) LEFT(22) EDIT(LENGTH=26),
+                "Maritial:" LEFT(60),
+                LOAD-REC-ALL[145:145] LEFT(70) 
+                EDIT(LENGTH=1),
+                "Rel/Guar:" LEFT(82),
+                LOAD-REC-ALL[163:163] LEFT(92) 
+                EDIT(LENGTH=1),
+                "Phone:" SKIP(1) LEFT(22),
+                $EDIT(LOAD-REC-ALL[124:133],"(ddd) ddd-dddd") 
+                LEFT(29) EDIT(LENGTH=14),
+                "SSN     :" LEFT(60),
+                LV-SSN LEFT(70) EDIT(LENGTH=11),
+                "Err:" SKIP(2) LEFT(22),
+                L-D-MSG LEFT(27) EDIT(LENGTH=60),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE = "G0" AND L-D-ERR = 1 THEN BEGIN 
+    (* DEMO-NON CRITICAL GUARANTOR RECORD *)
+    (* GTW 7/10/09 #14705 - DISPLAY LV-SSN AFTER IT GOES THROUGH MASK-SSN *)
+    LV-SSN = LOAD-REC-ALL[146:148] + "-" + LOAD-REC-ALL[149:150] + "-" +
+             LOAD-REC-ALL[151:154];
+    LOGIC-MASK-SSN USING LV-SSN MODIFY;
+    LV-NC-DEMO-CNT = LV-NC-DEMO-CNT + 1;
+          PRINT "Guarantor:" SKIP(2) NEED(6) 
+                LEFT(10),
+                $TRIM(LOAD-REC-ALL[15:34],RIGHT)+", "+LOAD-REC-ALL[35:46] 
+                LEFT(22) EDIT(LENGTH=34),
+                "Sex     :" LEFT(60),
+                LOAD-REC-ALL[144:144] LEFT(70) 
+                EDIT(LENGTH=1),
+                LOAD-REC-ALL[47:70] SKIP(1) LEFT(22) 
+                EDIT(LENGTH=24),
+                "DOB     :" LEFT(60),
+                $EDIT(LOAD-REC-ALL[159:162],"dd/dd/")+ LOAD-REC-ALL[155:158] 
+                LEFT(70) EDIT(LENGTH=10),
+                $TRIM(LOAD-REC-ALL[95:110],RIGHT)+", "+ 
+                LOAD-REC-ALL[111:112]+" "+LOAD-REC-ALL[113:117] 
+                SKIP(1) LEFT(22) EDIT(LENGTH=26),
+                "Marital :" LEFT(60),
+                LOAD-REC-ALL[145:145] LEFT(70) 
+                EDIT(LENGTH=1),
+                "Phone:" SKIP(1) LEFT(22),
+                $EDIT(LOAD-REC-ALL[124:133],"(ddd) ddd-dddd") 
+                LEFT(29) EDIT(LENGTH=14),
+                "SSN     :" LEFT(60),
+                LV-SSN LEFT(70) EDIT(LENGTH=9),
+                "Err:" SKIP(2) LEFT(22),
+                L-D-MSG LEFT(27) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE[1:1] = "I" AND L-D-ERR = 1 THEN BEGIN 
+    (* DEMO-NON CRITICAL INSURANCE RECORD *)
+    LV-NC-INS-CNT = LV-NC-INS-CNT + 1;
+          PRINT "Insurance:" SKIP(2) NEED(6) 
+                LEFT(10),
+                $TRIM(LOAD-REC-ALL[15:18]) + " - " + LOAD-REC-ALL[19:42] 
+                LEFT(22) EDIT(LENGTH=31),
+                "SubName :" LEFT(60),
+                $TRIM(LOAD-REC-ALL[120:139],RIGHT)+", "+ 
+                LOAD-REC-ALL[140:151] LEFT(70) 
+                EDIT(LENGTH=34),
+                LOAD-REC-ALL[43:66] SKIP(1) LEFT(22) 
+                EDIT(LENGTH=24),
+                "Policy  :" LEFT(60),
+                LOAD-REC-ALL[154:177] LEFT(70) 
+                EDIT(LENGTH=24),
+                LOAD-REC-ALL[67:90] SKIP(1) LEFT(22) 
+                EDIT(LENGTH=24),
+                "Group   :" LEFT(60),
+                LOAD-REC-ALL[178:193] LEFT(70) 
+                EDIT(LENGTH=16),
+                "-" LEFT(87),
+                LOAD-REC-ALL[194:209] LEFT(89) 
+                EDIT(LENGTH=16),
+                $TRIM(LOAD-REC-ALL[91:106],RIGHT)+", "+ 
+                LOAD-REC-ALL[107:108]+" "+LOAD-REC-ALL[109:113] 
+                SKIP(1) LEFT(22) EDIT(LENGTH=26),
+                "Effect  :" LEFT(60),
+                $EDIT(LOAD-REC-ALL[214:217],"dd/dd/")+LOAD-REC-ALL[210:213] 
+                LEFT(70) EDIT(LENGTH=10),
+                "-" LEFT(81),
+                $EDIT(LOAD-REC-ALL[222:225],"dd/dd/")+LOAD-REC-ALL[218:221] 
+                LEFT(83) EDIT(LENGTH=10),
+                "Err:" SKIP(2) LEFT(22),
+                L-D-MSG LEFT(27) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE[1:1] = "E" AND L-D-ERR = 1 THEN BEGIN 
+    (* DEMO-NON CRITICAL EMPLOYER RECORD *)
+    LV-NC-DEMO-CNT = LV-NC-DEMO-CNT + 1;
+          PRINT "Employer:" SKIP(2) NEED(4) LEFT(10),
+                LOAD-REC-ALL[31:60] LEFT(22) 
+                EDIT(LENGTH=30),
+                LOAD-REC-ALL[15:30] SKIP(1) LEFT(22) 
+                EDIT(LENGTH=16),
+                "Err:" SKIP(2) LEFT(22),
+                L-D-MSG LEFT(27) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE = "C0" AND L-C-ERR = 1 THEN BEGIN 
+    (* TRAN-NON CRITICAL CHARGE RECORD *)
+    LV-NC-TRAN-CNT = LV-NC-TRAN-CNT + 1;
+          PRINT "Charge:     Phys   :" SKIP(2) 
+                NEED(6) LEFT(10),
+                LOAD-REC-ALL[65:72] LEFT(31) 
+                EDIT(LENGTH=8),
+                "Div  :" LEFT(41),
+                LOAD-REC-ALL[97:100] LEFT(48) 
+                EDIT(LENGTH=4),
+                "DOS :" LEFT(58),
+                $EDIT(LOAD-REC-ALL[19:22],"dd/dd/")+LOAD-REC-ALL[15:18] 
+                LEFT(64) EDIT(LENGTH=10),
+                "Admit:" LEFT(76),
+                $EDIT(LOAD-REC-ALL[124:127],"dd/dd/")+LOAD-REC-ALL[120:123] 
+                LEFT(83) EDIT(LENGTH=10),
+                "-" LEFT(94),
+                $EDIT(LOAD-REC-ALL[138:141],"dd/dd/")+LOAD-REC-ALL[134:137] 
+                LEFT(96) EDIT(LENGTH=10),
+                "Cond    :" LEFT(111),
+                LOAD-REC-ALL[111:111] LEFT(121) 
+                EDIT(LENGTH=1),
+                "Loc    :" SKIP(1) LEFT(22),
+                LOAD-REC-ALL[73:76] LEFT(31) 
+                EDIT(LENGTH=4),
+                "Dept :" LEFT(41),
+                LOAD-REC-ALL[101:104] LEFT(48) 
+                EDIT(LENGTH=4),
+                "Proc:" LEFT(58),
+                LOAD-REC-ALL[23:32] LEFT(64) 
+                EDIT(LENGTH=10),
+                "Auth#:" LEFT(76),
+                LOAD-REC-ALL[244:261] LEFT(83) 
+                EDIT(LENGTH=18),
+                "Onset Dt:" LEFT(111),
+                $EDIT(LOAD-REC-ALL[116:119],"dd/dd/")+LOAD-REC-ALL[112:115] 
+                LEFT(121) EDIT(LENGTH=10),
+                "Assist :" SKIP(1) LEFT(22),
+                LOAD-REC-ALL[77:84] LEFT(31) 
+                EDIT(LENGTH=8),
+                "Inst :" LEFT(41),
+                LOAD-REC-ALL[105:108] LEFT(48) 
+                EDIT(LENGTH=4),
+                "Unit:" LEFT(58),
+                $NUM(LOAD-REC-ALL[61:64])/10 
+                LEFT(64) EDIT(MASK='--9.9'),
+                "Accn#:" LEFT(76),
+                LOAD-REC-ALL[320:339] LEFT(83) 
+                EDIT(LENGTH=20),
+                "Enctr   :" LEFT(111),
+                LOAD-REC-ALL[273:284] LEFT(121) 
+                EDIT(LENGTH=12),
+                "Special:" SKIP(1) LEFT(22),
+                LOAD-REC-ALL[93:96] LEFT(31) 
+                EDIT(LENGTH=4),
+                "Refer:" LEFT(41),
+                LOAD-REC-ALL[85:92] LEFT(48) 
+                EDIT(LENGTH=8),
+                "Amt :" LEFT(58),
+                $NUM(LOAD-REC-ALL[53:60])/100 
+                LEFT(64) EDIT(MASK='-----9.99'),
+                "Diag :" LEFT(76),
+                LOAD-REC-ALL[148:153] LEFT(83) 
+                EDIT(LENGTH=6),
+                LOAD-REC-ALL[170:175] LEFT(90) 
+                EDIT(LENGTH=6),
+                LOAD-REC-ALL[192:197] LEFT(97) 
+                EDIT(LENGTH=6),
+                LOAD-REC-ALL[214:219] LEFT(104) 
+                EDIT(LENGTH=6),
+                "Mod     :" LEFT(111),
+                $EDIT(LOAD-REC-ALL[236:239],"xx/xx") 
+                LEFT(121) EDIT(LENGTH=5),
+                "Misc Dt:" SKIP(1) LEFT(22),
+                $EDIT(LOAD-REC-ALL[365:368],"dd/dd/") + 
+                LOAD-REC-ALL[361:364] LEFT(31) 
+                EDIT(LENGTH=10),
+                "Err:" SKIP(2) LEFT(22),
+                L-C-MSG LEFT(27) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE = "R0" AND L-C-ERR = 1 THEN BEGIN 
+    (* TRAN-NON CRITICAL RECEIPT RECORD *)
+    LV-NC-TRAN-CNT = LV-NC-TRAN-CNT + 1;
+          PRINT "Receipt:    Source:" SKIP(2) 
+                NEED(3) LEFT(10),
+                LOAD-REC-ALL[23:26] LEFT(30) 
+                EDIT(LENGTH=4),
+                "DOS:" LEFT(36),
+                $EDIT(LOAD-REC-ALL[19:22],"dd/dd/")+LOAD-REC-ALL[15:18] 
+                LEFT(41) EDIT(LENGTH=10),
+                "Amt:" LEFT(53),
+                $NUM(LOAD-REC-ALL[51:58])/100 
+                LEFT(58) EDIT(MASK='-----9.99'),
+                "Check Dt:" LEFT(69),
+                $EDIT(LOAD-REC-ALL[75:78],"dd/dd/")+LOAD-REC-ALL[71:74] 
+                LEFT(79) EDIT(LENGTH=10),
+                "Check#:" LEFT(91),
+                LOAD-REC-ALL[59:70] LEFT(99) 
+                EDIT(LENGTH=12),
+                "Err:" SKIP(2) LEFT(22),
+                L-C-MSG LEFT(27) EDIT(LENGTH=90),
+                "**ERROR**" LEFT(119);
+          END;
+       END;
+    AT RECORD DO ON PRINTER-FILE3 BEGIN 
+       IF LOAD-REC-TYPE="A0" AND L-C-ERR=1 THEN BEGIN 
+    (* TRAN-NON CRITICAL ADJUST RECORD *)
+    LV-NC-TRAN-CNT = LV-NC-TRAN-CNT + 1;
+          PRINT "Adjust:     Code:" SKIP(2) NEED(3) 
+                LEFT(10),
+                LOAD-REC-ALL[23:26] LEFT(28) 
+                EDIT(LENGTH=4),
+                "Proc:" LEFT(34),
+                LOAD-REC-ALL[67:76] LEFT(40) 
+                EDIT(LENGTH=10),
+                "DOS:" LEFT(52),
+                $EDIT(LOAD-REC-ALL[19:22],"dd/dd/")+LOAD-REC-ALL[15:18] 
+                LEFT(57) EDIT(LENGTH=10),
+                "Cred/Amt:" LEFT(69),
+                $NUM(LOAD-REC-ALL[59:66])/100 
+                LEFT(79) EDIT(MASK='-----9.99'),
+                "Deb/Amt:" LEFT(90),
+                $NUM(LOAD-REC-ALL[51:58])/100 
+                LEFT(99) EDIT(MASK='-----9.99'),
+                "Err:" SKIP(2) LEFT(22),
+                L-C-MSG LEFT(27) EDIT(LENGTH=90);
+          END;
+       END;
+    AT FINAL DO ON PRINTER-FILE3 BEGIN 
+       PRINT "Non-Critical Error Summary..." 
+             SKIP(2) NEED(4) LEFT(22),
+             "Demographic Count :" SKIP(1) LEFT(26),
+             LV-NC-DEMO-CNT LEFT(46) EDIT(MASK='-----9'),
+             "Insurance Count   :" SKIP(1) LEFT(26),
+             LV-NC-INS-CNT LEFT(46) EDIT(MASK='-----9'),
+             "Transaction Count :" SKIP(1) LEFT(26),
+             LV-NC-TRAN-CNT LEFT(46) EDIT(MASK='-----9');
+       END;
+    AT FINAL DO ON PRINTER-FILE3 BEGIN 
+       IF CL-USE-CHG-AMT = "Y" THEN BEGIN 
+          PRINT "Dollar Amount     : $" SKIP(0) 
+                LEFT(26),
+                L-LV-NON-AMT-LD LEFT(47) EDIT(MASK='-------9.99'),
+                ("(* NOTE: This dollar amount is already figured on the LOADED r" +
+                 "eport *)") LEFT(60);
+          END;
+       END;
+    AT HEADING DO ON PRINTER-FILE NOTHING;
+    AT HEADING DO ON PRINTER-FILE2 NOTHING;
+    AT HEADING DO ON PRINTER-FILE3 NOTHING;
+EXIT;

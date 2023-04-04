@@ -12,6 +12,7 @@
 		"node": "*"
 	},
 	"dependencies": {
+		"nearley": "^2.20.1",
 		"vscode-languageserver": "^8.1.0",
 		"vscode-languageserver-textdocument": "^1.0.8"
 	}
