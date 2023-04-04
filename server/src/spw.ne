@@ -55,4 +55,4 @@ expression
   | %variable {% id %}
   | %func     {% id %}
 
-_ -> %WS:*
+_ -> (%WS | %NL):*
