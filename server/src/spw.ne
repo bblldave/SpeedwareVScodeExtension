@@ -2,18 +2,19 @@
   const lexer = require("../out/lexer.js");
 %}
 
-
 @lexer lexer
 
 program
   -> object %colon %NL statements "EXIT" %semiColon %NL
-statements
-  -> statement
-  | statement (%NL statement):* 
 
+statements
+  -> statement_semi (%NL statement_semi):*
+
+statement_semi
+  -> statement %semiColon
 
 statement
-  -> _ %verb _ object _ option_list:? _ parameter_list:? %semiColon _ %lineComment:? 
+  -> _ %verb _ object _ option_list:? _ parameter_list:? _ %lineComment:?
     {%
       (data) => {
         return {
@@ -23,10 +24,10 @@ statement
       }
     %}
   | var_assignment
-  | %verb _ parameter:? _ %keyword:? _ %verb:? _ object:? _ %verb:? _ option:? %semiColon
-  | %verb _ option %semiColon
+  | %verb _ parameter:? _ %keyword:? _ %verb:? _ object:? _ %verb:? _ option:?
+  | %verb _ option
   | _ %lineComment
-  | _ %blockComment 
+  | _ %blockComment
 
 object -> %object | %object %lparen (%string | %number | %object) %rparen
 
@@ -38,9 +39,8 @@ parameter -> %parameter %assign (%string | %number | %object | %subtype | %stora
 
 parameter_list -> parameter (%comma _ parameter):*
 
-
 var_assignment
-  -> %object _ %assign _ expression _ %semiColon
+  -> %object _ %assign _ expression
     {%
       (data) => {
         return {
@@ -51,7 +51,7 @@ var_assignment
       }
     %}
 
-expression 
+expression
   -> %string  {% id %}
   | %number   {% id %}
   | %object   {% id %}
