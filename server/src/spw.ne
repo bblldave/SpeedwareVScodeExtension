@@ -5,16 +5,13 @@
 @lexer lexer
 
 program
-  -> object %colon %NL statements "EXIT" %semiColon %NL
-
+  -> object %colon %NL statements "EXIT" %semiColon _ %lineComment:? %NL
 statements
-  -> statement_semi (%NL statement_semi):*
-
-statement_semi
-  -> statement %semiColon
+  -> statement
+  | statement (%NL statement):*
 
 statement
-  -> _ %verb _ object _ option_list:? _ parameter_list:? _ %lineComment:?
+  -> _ %verb _ object _ option_list:? _ parameter_list:? %semiColon _ %lineComment:? 
     {%
       (data) => {
         return {
@@ -24,10 +21,10 @@ statement
       }
     %}
   | var_assignment
-  | %verb _ parameter:? _ %keyword:? _ %verb:? _ object:? _ %verb:? _ option:?
-  | %verb _ option
+  | %verb _ parameter:? _ %keyword:? _ %verb:? _ object:? _ %verb:? _ option:? %semiColon _ %lineComment:?
+  | %verb _ option %semiColon _ %lineComment:?
   | _ %lineComment
-  | _ %blockComment
+  | _ %blockComment 
 
 object -> %object | %object %lparen (%string | %number | %object) %rparen
 
@@ -40,7 +37,7 @@ parameter -> %parameter %assign (%string | %number | %object | %subtype | %stora
 parameter_list -> parameter (%comma _ parameter):*
 
 var_assignment
-  -> %object _ %assign _ expression
+  -> %object _ %assign _ expression _ %semiColon _ %lineComment:? 
     {%
       (data) => {
         return {
@@ -51,7 +48,7 @@ var_assignment
       }
     %}
 
-expression
+expression 
   -> %string  {% id %}
   | %number   {% id %}
   | %object   {% id %}
